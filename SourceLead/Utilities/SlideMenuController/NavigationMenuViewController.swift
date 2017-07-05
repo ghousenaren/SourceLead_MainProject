@@ -18,6 +18,7 @@
 
 import UIKit
 import InteractiveSideMenu
+import moa
 
 /*
  Menu controller is responsible for creating its content and showing/hiding menu using 'menuContainerViewController' property.
