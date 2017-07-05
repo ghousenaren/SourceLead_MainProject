@@ -944,7 +944,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="p6F-P7-Pyy" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="ic_home_icon" id="3ke-p4-0Fq"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gQN-4Q-xf1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gQN-4Q-xf1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -957,10 +957,10 @@
             </objects>
             <point key="canvasLocation" x="2897" y="-1036"/>
         </scene>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="vnG-3i-WAI">
             <objects>
-                <viewController id="o6b-eL-qCK" sceneMemberID="viewController">
+                <viewController id="o6b-eL-qCK" customClass="HomeViewController" customModule="SourceLead" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="U6j-F0-XkE"/>
                         <viewControllerLayoutGuide type="bottom" id="IuT-LA-fuw"/>

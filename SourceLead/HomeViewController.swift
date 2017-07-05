@@ -102,9 +102,10 @@ extension HomeViewController {
             if let result = json as? Dictionary<String , AnyObject> {
                 print(result)
                 
-                guard let mainResponse = Response(json: result) else {
+                guard let mainResponse = MainResponse(json: result) else {
                     return
                 }
+                StorageData.set(mainResponse, forKey: "MAIN_RESPONSE")
                 
                 print(" \(mainResponse.firstName!) and \(mainResponse.lastName!)" )
                 print(mainResponse)

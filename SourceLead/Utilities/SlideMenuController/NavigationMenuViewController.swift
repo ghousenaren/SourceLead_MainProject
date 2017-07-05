@@ -37,6 +37,9 @@ class NavigationMenuViewController: MenuViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let mainResponse = StorageData.value(forKey: "MAIN_RESPONSE") as MainResponse
+        menuItems       = mainResponse.locationList.vukPin.menuList
+        menuItemIcons   =  mainResponse.locationList.vukPin.menuIconsList
         
         // Select the initial row
         self.tableView.backgroundColor = UIColor .white
