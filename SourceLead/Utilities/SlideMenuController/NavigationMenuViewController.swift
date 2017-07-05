@@ -25,9 +25,14 @@ import moa
  */
 class NavigationMenuViewController: MenuViewController {
 
+    
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var userFullNameLabel: UILabel!
+    @IBOutlet weak var userEmailIdLabel: UILabel!
+    
     let kCellReuseIdentifier = "MenuCell"
-    let menuItems      = []
-    let menuItemIcons  = []
+    var menuItems      = [String]()
+    var menuItemIcons  = [String]()
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -38,9 +43,15 @@ class NavigationMenuViewController: MenuViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let mainResponse = StorageData.value(forKey: "MAIN_RESPONSE") as MainResponse
-        menuItems       = mainResponse.locationList.vukPin.menuList
-        menuItemIcons   =  mainResponse.locationList.vukPin.menuIconsList
+        if let mainResponse = StorageData.value(forKey: "MAIN_RESPONSE") as? MainResponse {
+            menuItems       = (mainResponse.locationList?.vukPin?.menuList)!
+            menuItemIcons   =  (mainResponse.locationList?.vukPin?.menuIconsList)!
+            profileImageView.moa.url = (mainResponse.profileImageUrl)! as String
+            let fullName    = mainResponse.firstName! + " " + mainResponse.lastName!
+            userFullNameLabel.text = fullName
+            userEmailIdLabel.text  = mainResponse.locationList?.vukPin?.orgName! //for time being added org name, need to change if need.
+            //even need to check using guard or if let for force unwrapping.
+        }
         
         // Select the initial row
         self.tableView.backgroundColor = UIColor .white
@@ -64,7 +75,7 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let menuCell : MenuItemTableViewCell = tableView.dequeueReusableCell(withIdentifier: kCellReuseIdentifier, for: indexPath) as? MenuItemTableViewCell
+        let menuCell : MenuItemTableViewCell = tableView.dequeueReusableCell(withIdentifier: kCellReuseIdentifier, for: indexPath) as! MenuItemTableViewCell
         
         menuCell.menuItemImageView.moa.url = menuItemIcons[indexPath.row] as String
         menuCell.menuLabel.text            = menuItems[indexPath.row] as String
@@ -73,7 +84,7 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
         cell.textLabel?.text = menuItems[indexPath.row]
         cell.textLabel?.textColor = UIColor.black*/
 
-        return cell
+        return menuCell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

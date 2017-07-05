@@ -67,6 +67,11 @@
 			<key>orderHint</key>
 			<integer>10</integer>
 		</dict>
+		<key>Gloss.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>19</integer>
+		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -131,6 +136,11 @@
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
+		<key>moa.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -140,6 +150,11 @@
 			<true/>
 		</dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>279AA6726F52A334C45E85774BD21A3D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -155,6 +170,11 @@
 			<true/>
 		</dict>
 		<key>3414B86053E4D92AA0A34A38028EF30B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>40E7477AD67135868F5FB08136602674</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -189,12 +209,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>5F801094EE6B277C4C425BBA80116892</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>681BE6E3D02A43F9BA63777AC435C8FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6D8EAC98AE4D94AD3EB0F13FFEF8AC1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6DDFBC69EA97881C0D12F37D9C021D48</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>7335E9C9689F3B8A16F063A884748533</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>82EFFF0BB4616A0AAB7E390AE82D9511</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -245,6 +285,11 @@
 			<true/>
 		</dict>
 		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EABBB43D3EC6918A8F5E26F9B2441A0B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
