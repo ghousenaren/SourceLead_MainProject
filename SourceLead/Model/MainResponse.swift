@@ -28,8 +28,8 @@ struct LocationList : Decodable {
     
     // MARK: - Deserialization
     init?(json: JSON) {
-        self.vukPin           = "uvKPIN" <~~ json
-        self.vuxPin           = "uvxPIN" <~~ json
+        self.vukPin           = "txhlIN" <~~ json
+        self.vuxPin           = "czpIV" <~~ json
     }
 }
 
@@ -59,7 +59,7 @@ struct VUKPin : Decodable {
         self.state              = "state" <~~ json
         self.city               = "city" <~~ json
         self.orgLocationAddress = "orgLocationAddress" <~~ json
-        self.webSite            = "webSite" <~~ json
+        self.webSite            = "website" <~~ json
         self.isPrimaryOrg       = "isPrimaryOrg" <~~ json
         self.userType           = "userType" <~~ json
         self.menuList           = "menuList" <~~ json
@@ -94,7 +94,7 @@ struct VUXPin : Decodable{
         self.state              = "state" <~~ json
         self.city               = "city" <~~ json
         self.orgLocationAddress = "orgLocationAddress" <~~ json
-        self.webSite            = "webSite" <~~ json
+        self.webSite            = "website" <~~ json
         self.isPrimaryOrg       = "isPrimaryOrg" <~~ json
         self.userType           = "userType" <~~ json
         self.menuList           = "menuList" <~~ json
