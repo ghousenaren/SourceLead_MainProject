@@ -16,7 +16,7 @@ class HomeViewController: UIViewController, SideMenuItemContent, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //loginProife()
+        loginProife()
         
         // Do any additional setup after loading the view.
     }
@@ -87,7 +87,7 @@ extension HomeViewController {
          "token" :tokenvalue as! String
          ]*/
         //let url = BASE_URL +  "restAuthenticate"
-        let url = "http://192.168.1.10:8080/sourcelead/rest/loginUserProfile"
+        let url = "http://192.168.1.53:8080/sourcelead/rest/loginUserProfile"
         /*var data : Data
          do {
          data = try JSONSerialization.data(withJSONObject:parameter, options:[])
@@ -100,19 +100,12 @@ extension HomeViewController {
         let headers : [String : AnyObject] = ["Content-Type" : "application/json" as AnyObject, "X-CustomToken" : tokenvalue as AnyObject]
         WebServices.sharedInstance.performApiCallWithURLString(urlString: url, methodName: "GET", headers: headers, parameters: nil, httpBody: nil, withMessage: "Loading...", alertMessage: "Please check your device settings to ensure you have a working internet connection.", fromView: self.view, successHandler:  {[weak self] json, response in
             if let result = json as? Dictionary<String , AnyObject> {
-                print(result)
                 
-                guard let mainResponse = MainResponse(json: result) else {
+                /*guard let mainResponseArc = MainResponse(json: result) else {
+                    print("--------------Error-------------")
                     return
-                }
-                StorageData.set(mainResponse, forKey: "MAIN_RESPONSE")
-                
-                print(" \(mainResponse.firstName!) and \(mainResponse.lastName!)" )
-                print(mainResponse)
-                //print(mainResponse.menuList!)
-                
-                
-                
+                }*/
+                StorageData.set(result, forKey: "MAIN_RESPONSE")
             }else {
                 self?.showAlertMessage(title : "Problem" , message: "Issue in API Response.")
             }

@@ -1,10 +1,6 @@
 //
 //  Designables.swift
-//  KYGInsurance
-//
-//  Created by Ghouse Basha Shaik on 23/06/17.
-//  Copyright © 2017 Ghouse Basha Shaik. All rights reserved.
-//
+//  Created by BIS on 5/31/17.
 
 import Foundation
 import UIKit

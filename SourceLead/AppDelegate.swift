@@ -13,8 +13,6 @@ import IQKeyboardManager
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate{
  var window: UIWindow?
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Initialize sign-in
         
@@ -22,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         UINavigationBar.appearance().barTintColor = UIColor(red: 22.0/255.0, green: 111.0/255.0, blue: 192.0/255.0, alpha: 1.0)
         switchScreens()
         //createMenuView()
-        
         return true
 
         // Override point for customization after application launch.

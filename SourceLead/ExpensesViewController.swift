@@ -13,6 +13,10 @@ class ExpensesViewController: UIViewController {
     @IBOutlet weak var expensesBottomView: UIView!
     @IBOutlet weak var employeessBottomView: UIView!
 
+    @IBAction func backtodashboard(_ sender: Any) {
+            navigationController?.popToRootViewController(animated: true)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
     }

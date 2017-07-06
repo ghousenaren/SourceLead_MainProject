@@ -28,7 +28,7 @@ struct LocationList : Decodable {
     
     // MARK: - Deserialization
     init?(json: JSON) {
-        self.vukPin           = "txhlIN" <~~ json
+        self.vukPin           = "w5fJm" <~~ json
         self.vuxPin           = "czpIV" <~~ json
     }
 }

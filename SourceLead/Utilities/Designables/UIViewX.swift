@@ -1,10 +1,7 @@
-//
-//  GradientViewX.swift
-//  VSoft
-//
-//  Created by Shaik Ghouse Basha on 18/3/17.
-//  Copyright © 2017 Shaik Ghouse Basha. All rights reserved.
-//
+
+
+//  Created by BIS on 5/31/17.
+//  Created by BIS on 5/31/17.
 
 import UIKit
 

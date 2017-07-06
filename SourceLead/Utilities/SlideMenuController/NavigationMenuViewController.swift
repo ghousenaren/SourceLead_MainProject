@@ -43,7 +43,14 @@ class NavigationMenuViewController: MenuViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let mainResponse = StorageData.value(forKey: "MAIN_RESPONSE") as? MainResponse {
+        let result = StorageData.value(forKey: "MAIN_RESPONSE") as? Dictionary<String , AnyObject>
+        
+        guard let mainResponseArc = MainResponse(json: result!) else {
+            print("--------------Error-------------")
+            return
+        }
+        
+        if let mainResponse = mainResponseArc as? MainResponse {
             menuItems       = (mainResponse.locationList?.vukPin?.menuList)!
             menuItemIcons   =  (mainResponse.locationList?.vukPin?.menuIconsList)!
             profileImageView.moa.url = (mainResponse.profileImageUrl)! as String
