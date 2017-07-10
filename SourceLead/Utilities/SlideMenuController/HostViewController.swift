@@ -48,7 +48,7 @@ class HostViewController: MenuContainerViewController {
         self.contentViewControllers = contentControllers()
 
         // Select initial content controller. It's needed even if the first view controller should be selected.
-        self.selectContentViewController(contentViewControllers.first!)
+        self.selectContentViewController((contentViewControllers.first)!)
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -68,14 +68,33 @@ class HostViewController: MenuContainerViewController {
     }
 
     private func contentControllers() -> [UIViewController] {
-        let controllersIdentifiers = ["TabBarHome","TimeSheets", "Expenses"]
         var contentList = [UIViewController]()
+        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarHome" ) {
+            contentList.append(viewController)
+        }
+       
+        guard let result = StorageData.value(forKey: "MAIN_RESPONSE") as? Dictionary<String , AnyObject> else {
+            return contentList
+        }
+        
+        guard let mainResponseArc = MainResponse(json: result) else {
+            print("--------------Error-------------")
+            return contentList
+        }
+        
+        var controllersIdentifiers = [String]()
+        
+        if let mainResponse = mainResponseArc as? MainResponse {
+            controllersIdentifiers       = (mainResponse.locationList?.vukPin?.menuList)!
+        }
+        
+        
 
         /*
          Instantiate items controllers from storyboard.
          */
         for identifier in controllersIdentifiers {
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier) {
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier ) {
                 contentList.append(viewController)
             }
         }

@@ -30,6 +30,11 @@ class HomeViewController: UIViewController, SideMenuItemContent, UITableViewData
             self?.present(alert, animated: true, completion: nil)
         }
     }
+    
+    @IBAction func unwindToHomeViewController(segue: UIStoryboardSegue) {
+        print("Unwind to Root View Controller")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

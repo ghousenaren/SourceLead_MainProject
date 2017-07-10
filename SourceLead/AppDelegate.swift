@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         IQKeyboardManager.shared().isEnabled = true
         UINavigationBar.appearance().barTintColor = UIColor(red: 22.0/255.0, green: 111.0/255.0, blue: 192.0/255.0, alpha: 1.0)
-        switchScreens()
-        //createMenuView()
+        //switchScreens()
+        createMenuView()
         return true
 
         // Override point for customization after application launch.

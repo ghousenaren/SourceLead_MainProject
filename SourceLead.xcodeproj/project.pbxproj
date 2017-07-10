@@ -54,6 +54,9 @@
 		647842321F06143000066738 /* HostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6478422E1F06143000066738 /* HostViewController.swift */; };
 		647842341F06143000066738 /* NavigationMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647842301F06143000066738 /* NavigationMenuViewController.swift */; };
 		647842351F06143000066738 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647842311F06143000066738 /* TabBarViewController.swift */; };
+		64CDFABB1F133953002C528A /* MyExpensesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CDFABA1F133953002C528A /* MyExpensesTableViewCell.swift */; };
+		64CDFABD1F1345A4002C528A /* NewExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CDFABC1F1345A4002C528A /* NewExpensesViewController.swift */; };
+		64CDFABF1F134A1D002C528A /* NewExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CDFABE1F134A1D002C528A /* NewExpenseTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +118,9 @@
 		6478422E1F06143000066738 /* HostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostViewController.swift; sourceTree = "<group>"; };
 		647842301F06143000066738 /* NavigationMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationMenuViewController.swift; sourceTree = "<group>"; };
 		647842311F06143000066738 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		64CDFABA1F133953002C528A /* MyExpensesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyExpensesTableViewCell.swift; path = View/MyExpensesTableViewCell.swift; sourceTree = "<group>"; };
+		64CDFABC1F1345A4002C528A /* NewExpensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExpensesViewController.swift; sourceTree = "<group>"; };
+		64CDFABE1F134A1D002C528A /* NewExpenseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewExpenseTableViewCell.swift; path = View/NewExpenseTableViewCell.swift; sourceTree = "<group>"; };
 		85FE918F7FCA9E2412E1F08F /* libPods-SourceLeadUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SourceLeadUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -173,6 +179,8 @@
 			isa = PBXGroup;
 			children = (
 				643B6A781F0CA44E00CA2AE1 /* MenuItemTableViewCell.swift */,
+				64CDFABA1F133953002C528A /* MyExpensesTableViewCell.swift */,
+				64CDFABE1F134A1D002C528A /* NewExpenseTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -239,6 +247,7 @@
 			children = (
 				643B6A7C1F0CDFBD00CA2AE1 /* ExpensesViewController.swift */,
 				48EFE30C1F0A252100B8E908 /* HomeViewController.swift */,
+				64CDFABC1F1345A4002C528A /* NewExpensesViewController.swift */,
 			);
 			name = TabbarControllers;
 			sourceTree = "<group>";
@@ -500,11 +509,14 @@
 				480D3BB51EDFD26900545567 /* LoginViewController.swift in Sources */,
 				480D3BB91EE0115200545567 /* ForgotViewController.swift in Sources */,
 				647842341F06143000066738 /* NavigationMenuViewController.swift in Sources */,
+				64CDFABF1F134A1D002C528A /* NewExpenseTableViewCell.swift in Sources */,
 				484E1ABB1EDEF16E0095052A /* Welcome.swift in Sources */,
 				646C4F531EFB92AA00FA4C63 /* UsefulExtensions.swift in Sources */,
+				64CDFABB1F133953002C528A /* MyExpensesTableViewCell.swift in Sources */,
 				484E1AB91EDEF16E0095052A /* AppDelegate.swift in Sources */,
 				643B6A791F0CA44E00CA2AE1 /* MenuItemTableViewCell.swift in Sources */,
 				480D3BBD1EE01B4500545567 /* SignUpViewController.swift in Sources */,
+				64CDFABD1F1345A4002C528A /* NewExpensesViewController.swift in Sources */,
 				642AD4581EF9095F000679F8 /* WebServices.swift in Sources */,
 				48BEC6E41EEA6C8100DEBAD0 /* ResetPasswordViewController.swift in Sources */,
 				647842321F06143000066738 /* HostViewController.swift in Sources */,
