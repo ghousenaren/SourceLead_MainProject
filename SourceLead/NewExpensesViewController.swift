@@ -36,15 +36,13 @@ class NewExpensesViewController: UIViewController {
 
 extension NewExpensesViewController : UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 2
+        return 1
     }
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : NewExpenseTableViewCell = tableView.dequeueReusableCell(withIdentifier: "addExpensesCell", for: indexPath) as! NewExpenseTableViewCell
-        if indexPath.row == 1 {
+        //let cell : NewExpenseTableViewCell = tableView.dequeueReusableCell(withIdentifier: "addExpensesCell", for: indexPath) as! NewExpenseTableViewCell
+        //if indexPath.row == 1 {
             let cell: NewExpenseTableViewCell = tableView.dequeueReusableCell(withIdentifier: "addExpensesCell", for: indexPath) as! NewExpenseTableViewCell
-        }else {
-            let cell: NewExpenseTableViewCell = tableView.dequeueReusableCell(withIdentifier: "expensesCell", for: indexPath) as! NewExpenseTableViewCell
-        }
+        //}
         
         return cell
     }
