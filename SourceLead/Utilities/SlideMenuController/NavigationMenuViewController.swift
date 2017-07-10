@@ -42,10 +42,13 @@ class NavigationMenuViewController: MenuViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let result = StorageData.value(forKey: "MAIN_RESPONSE") as? Dictionary<String , AnyObject>
+        guard let result = StorageData.value(forKey: "MAIN_RESPONSE") as? Dictionary<String , AnyObject> else {
+            return
+        }
         
-        guard let mainResponseArc = MainResponse(json: result!) else {
+        //let result = StorageData.value(forKey: "MAIN_RESPONSE") as? Dictionary<String , AnyObject>
+        
+        guard let mainResponseArc = MainResponse(json: result) else {
             print("--------------Error-------------")
             return
         }
