@@ -5,6 +5,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - CVCalendar (1.5.0)
   - FacebookCore (0.2.0):
     - Bolts (~> 1.8)
     - FBSDKCoreKit (~> 4.15)
@@ -55,23 +56,20 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMOAuth2 (1.1.4):
     - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.1.10):
-    - GTMSessionFetcher/Full (= 1.1.10)
-  - GTMSessionFetcher/Core (1.1.10)
-  - GTMSessionFetcher/Full (1.1.10):
-    - GTMSessionFetcher/Core (= 1.1.10)
+  - GTMSessionFetcher (1.1.11):
+    - GTMSessionFetcher/Full (= 1.1.11)
+  - GTMSessionFetcher/Core (1.1.11)
+  - GTMSessionFetcher/Full (1.1.11):
+    - GTMSessionFetcher/Core (= 1.1.11)
   - InteractiveSideMenu (2.0)
   - IQKeyboardManager (4.0.10)
   - JVFloatLabeledTextField (1.2.0)
   - MBProgressHUD (1.0.0)
   - moa (8.0.4)
   - ReachabilitySwift (3)
-  - SDWebImage (4.0.0):
-    - SDWebImage/Core (= 4.0.0)
-  - SDWebImage/Core (4.0.0)
-  - SideMenu (2.3.3)
 
 DEPENDENCIES:
+  - CVCalendar (~> 1.5.0)
   - FacebookCore
   - FacebookLogin
   - FacebookShare
@@ -83,11 +81,10 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.0.0)
   - moa (~> 8.0)
   - ReachabilitySwift (~> 3)
-  - SDWebImage
-  - SideMenu
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  CVCalendar: 5d51a7bda1b9439b612de69d86a91a73befa1936
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
   FacebookShare: 8e9ee8ea06505e6a1d3d719b0cc63e840fb8aaeb
@@ -102,16 +99,14 @@ SPEC CHECKSUMS:
   GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
-  GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   InteractiveSideMenu: 337f6d95a3f6543c517a888893531430e18553b3
   IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   JVFloatLabeledTextField: 96c0c1b6739001801340d25b86aff990d67c4181
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   moa: 954e2ad962886626d02c3486dd3a7bb5f0052d14
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
-  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
-  SideMenu: a447554ae5c982e8077666389e1c8b0c8656e065
 
-PODFILE CHECKSUM: 6c61d85909c16098e7e1f3c8917e301abc653656
+PODFILE CHECKSUM: e4f0b6e9b0c0b3e54a8fe117227efe14948e1ef4
 
 COCOAPODS: 1.2.1

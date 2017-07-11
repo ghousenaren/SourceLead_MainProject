@@ -5,8 +5,6 @@ target 'SourceLead' do
     # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
     use_frameworks!
     pod 'JVFloatLabeledTextField'
-    pod 'SideMenu'
-    pod 'SDWebImage'
     pod 'IQKeyboardManager'
     pod 'Google/SignIn'
     pod 'FacebookCore'
@@ -17,4 +15,5 @@ target 'SourceLead' do
     pod 'InteractiveSideMenu'
     pod 'Gloss'
     pod 'moa', '~> 8.0'
+    pod 'CVCalendar', '~> 1.5.0'
 end
