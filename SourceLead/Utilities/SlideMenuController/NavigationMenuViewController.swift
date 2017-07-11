@@ -91,12 +91,12 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let menuCell : MenuItemTableViewCell = tableView.dequeueReusableCell(withIdentifier: kCellReuseIdentifier, for: indexPath) as! MenuItemTableViewCell
         
-        menuCell.menuItemImageView.moa.url = menuItemIcons[indexPath.row] as String
+        //menuCell.menuItemImageView.moa.url = menuItemIcons[indexPath.row] as String
         menuCell.menuLabel.text            = menuItems[indexPath.row] as String
         
-        /*cell.imageView?.image = UIImage(named:"twitter.png")
-        cell.textLabel?.text = menuItems[indexPath.row]
-        cell.textLabel?.textColor = UIColor.black*/
+//        //cell.imageView?.image = UIImage(named:"twitter.png")
+      menuCell.menuItemImageView?.image = UIImage(named: menuItemIcons[indexPath.row])
+//       // cell.textLabel?.textColor = UIColor.black
 
         return menuCell
     }
