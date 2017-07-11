@@ -2,8 +2,7 @@
 ////  UIViewController+Extension.swift
 ////  Expense Tracker
 ////
-////  Created by Santosh K Sinangaram on 24/06/16.
-////  Copyright © 2016 Srikanth Sriperambuduru. All rights reserved.
+////
 ////
 //
 import Foundation
@@ -23,6 +22,28 @@ class Global: NSObject {
         }
         alertController.addAction(OKAction)
         return alertController
+    }
+    
+    class func dateFromString(dateString : String) -> Date {
+        let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)
+        let DateArray = dateString.components(separatedBy: "/")
+        let components = NSDateComponents()
+        components.year = Int(DateArray[2])!
+        components.month = Int(DateArray[1])!
+        components.day = Int(DateArray[0])! + 1
+        let date = calendar?.date(from: components as DateComponents)
+        
+        return date!
+    }
+    
+    class func stringFromDate(dateValue : Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let myString = formatter.string(from: dateValue as Date)
+        let yourDate: Date? = formatter.date(from: myString)
+        formatter.dateFormat = "dd MMM, yyyy"
+        //print(yourDate!)
+        return  formatter.string(from: yourDate!)
     }
 }
 

@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
  var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Initialize sign-in
-        
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         IQKeyboardManager.shared().isEnabled = true
         UINavigationBar.appearance().barTintColor = UIColor(red: 22.0/255.0, green: 111.0/255.0, blue: 192.0/255.0, alpha: 1.0)
         //switchScreens()

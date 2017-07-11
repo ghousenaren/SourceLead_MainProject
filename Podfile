@@ -15,5 +15,5 @@ target 'SourceLead' do
     pod 'InteractiveSideMenu'
     pod 'Gloss'
     pod 'moa', '~> 8.0'
-    pod 'CVCalendar', '~> 1.5.0'
+    pod 'SwiftyPickerPopover'
 end
