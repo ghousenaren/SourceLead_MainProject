@@ -42,7 +42,11 @@ class NavigationMenuViewController: MenuViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let result = StorageData.value(forKey: "MAIN_RESPONSE") as? Dictionary<String , AnyObject> else {
+        
+        guard let data = StorageData.object(forKey: "MAIN_RESPONSE") else {
+            return 
+        }
+        guard let result = NSKeyedUnarchiver.unarchiveObject(with: data as! Data) as? Dictionary<String , AnyObject> else {
             return
         }
         

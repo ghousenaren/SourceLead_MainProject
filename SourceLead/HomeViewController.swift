@@ -1,3 +1,4 @@
+
 //
 //  HomeViewController.swift
 //  SourceLead
@@ -110,7 +111,10 @@ extension HomeViewController {
                     print("--------------Error-------------")
                     return
                 }*/
-                StorageData.set(result, forKey: "MAIN_RESPONSE")
+                print(result)
+                let encodedData = NSKeyedArchiver.archivedData(withRootObject: result)
+                StorageData.set(encodedData, forKey: "MAIN_RESPONSE")
+                
             }else {
                 self?.showAlertMessage(title : "Problem" , message: "Issue in API Response.")
             }

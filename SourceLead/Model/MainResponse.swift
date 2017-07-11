@@ -2,7 +2,7 @@
 //  Response.swift
 //  SourceLead
 //
-//  Created by Ghouse Basha Shaik on 03/07/17.
+//  Created by BIS on 03/07/17.
 //  Copyright © 2017 BIS. All rights reserved.
 
 import Gloss
@@ -28,8 +28,8 @@ struct LocationList : Decodable {
     
     // MARK: - Deserialization
     init?(json: JSON) {
-        self.vukPin           = "w5fJm" <~~ json
-        self.vuxPin           = "czpIV" <~~ json
+        self.vukPin           = "DJWVIN" <~~ json
+        self.vuxPin           = "txhlIN" <~~ json
     }
 }
 
