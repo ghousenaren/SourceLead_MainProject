@@ -17,7 +17,7 @@ class HomeViewController: UIViewController, SideMenuItemContent, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       loginProife()
+       //loginProife()
         
         // Do any additional setup after loading the view.
     }

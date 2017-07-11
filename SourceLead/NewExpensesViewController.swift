@@ -18,6 +18,8 @@ class NewExpensesViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var endButton: UIButton!
     
+    @IBOutlet weak var clientDropMenu: DropMenuButton!
+    
     fileprivate var randomNumberOfDotMarkersForDay = [Int]()
     
     var shouldShowDaysOut = true
@@ -26,10 +28,14 @@ class NewExpensesViewController: UIViewController {
     var currentCalendar: Calendar?
     var selectedDateButton = ""
     
+    var clientMenu = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
         calendarHolder.isHidden = true
+        
+
+        clientDropMenu.initMenu(["Item A", "Item B", "Item C"], actions: [({ () -> (Void) in print("Im doing the A Action") }), ({ () -> (Void) in print("Im doing the B Action") }), ({ () -> (Void) in print("Im doing the C Action") })])
     }
     
     override func viewDidLayoutSubviews() {
@@ -52,6 +58,8 @@ class NewExpensesViewController: UIViewController {
         }
     }
 
+    
+    
     /*
     // MARK: - Navigation
 
@@ -143,7 +151,7 @@ extension NewExpensesViewController: CVCalendarViewDelegate, CVCalendarMenuViewD
     }
     
     func presentedDateUpdated(_ date: CVDate) {
-        if monthLabel.text != date.globalDescription && self.animationFinished {
+       // if monthLabel.text != date.globalDescription && self.animationFinished {
             let updatedMonthLabel = UILabel()
             updatedMonthLabel.textColor = monthLabel.textColor
             updatedMonthLabel.font = monthLabel.font
@@ -177,7 +185,7 @@ extension NewExpensesViewController: CVCalendarViewDelegate, CVCalendarMenuViewD
             }
             
             self.view.insertSubview(updatedMonthLabel, aboveSubview: self.monthLabel)
-        }
+       // }
     }
     
     func topMarker(shouldDisplayOnDayView dayView: CVCalendarDayView) -> Bool {
@@ -272,10 +280,8 @@ extension NewExpensesViewController: CVCalendarViewDelegate, CVCalendarMenuViewD
             if (Int(arc4random_uniform(3)) == 1) {
                 return true
             }
-            
             return false
         }
-        
     }
     
     func dayOfWeekTextColor() -> UIColor {

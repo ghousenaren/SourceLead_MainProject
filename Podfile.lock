@@ -1,4 +1,5 @@
 PODS:
+  - AZDropdownMenu (1.1.2)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -69,6 +70,7 @@ PODS:
   - ReachabilitySwift (3)
 
 DEPENDENCIES:
+  - AZDropdownMenu
   - CVCalendar (~> 1.5.0)
   - FacebookCore
   - FacebookLogin
@@ -83,6 +85,7 @@ DEPENDENCIES:
   - ReachabilitySwift (~> 3)
 
 SPEC CHECKSUMS:
+  AZDropdownMenu: 411c1b445fd29bb1e56b219131aaf294ba21b9b6
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   CVCalendar: 5d51a7bda1b9439b612de69d86a91a73befa1936
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
@@ -107,6 +110,6 @@ SPEC CHECKSUMS:
   moa: 954e2ad962886626d02c3486dd3a7bb5f0052d14
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
 
-PODFILE CHECKSUM: e4f0b6e9b0c0b3e54a8fe117227efe14948e1ef4
+PODFILE CHECKSUM: 5ab5b921f68b9e91b0e965f6c208bbe7b53507eb
 
 COCOAPODS: 1.2.1
