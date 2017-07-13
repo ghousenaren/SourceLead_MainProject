@@ -57,21 +57,43 @@ class NavigationMenuViewController: MenuViewController {
             return
         }
         
-        if let mainResponse = mainResponseArc as? MainResponse {
-            menuItems       = (mainResponse.locationList?.vukPin?.menuList)!
-            menuItemIcons   =  (mainResponse.locationList?.vukPin?.menuIconsList)!
-            profileImageView.moa.url = (mainResponse.profileImageUrl)! as String
-            let fullName    = mainResponse.firstName! + " " + mainResponse.lastName!
-            userFullNameLabel.text = fullName
-            userEmailIdLabel.text  = mainResponse.locationList?.vukPin?.orgName! //for time being added org name, need to change if need.
-            //even need to check using guard or if let for force unwrapping.
+        profileImageView.moa.url = (mainResponseArc.profileImageUrl)! as String
+        let UserID       = (mainResponseArc.userId)! as Int
+        StorageData.set(UserID, forKey: "USERID")
+         print(",........,.,,,..,/.......",StorageData.string(forKey: "USERID"))
+        print("???????????????????????????--------------------???????????????",UserID)
+        let fullName    = mainResponseArc.firstName! + " " + mainResponseArc.lastName!
+        userFullNameLabel.text = fullName
+        //for time being added
+        
+        for orgList in mainResponseArc.locationList! as [LocationList] {
+            if orgList.isPrimaryOrg == "Y" {
+                menuItems       = orgList.menuList!
+                menuItemIcons   =  orgList.menuIconsList!
+                userEmailIdLabel.text  = orgList.orgName!
+                let exlocationCode           = orgList.locationCode
+                StorageData.set(exlocationCode, forKey: "LOCATIONCODE")
+            }
         }
+
         
         // Select the initial row
         self.tableView.backgroundColor = UIColor .white
         tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.none)
         tableView.tableFooterView = UIView(frame: .zero)
     }
+    
+    @IBAction func logoutButtonAction(_ sender: UIButton) {
+        //LoginViewControllerID
+        StorageData.removeObject(forKey: "TOKEN")
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewControllerID") as? LoginViewController
+        {
+            
+            present(vc, animated: true, completion: nil)
+        }
+        //UIApplication.shared.keyWindow?.rootViewController = loginViewController
+    }
+    
 }
 
 /*

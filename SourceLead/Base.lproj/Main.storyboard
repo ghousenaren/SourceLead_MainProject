@@ -424,7 +424,7 @@
         <!--Login View Controller-->
         <scene sceneID="vlw-Eh-qaj">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="f8l-KC-CQ6" customClass="LoginViewController" customModule="SourceLead" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewControllerID" id="f8l-KC-CQ6" customClass="LoginViewController" customModule="SourceLead" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Smc-gC-YTZ"/>
                         <viewControllerLayoutGuide type="bottom" id="mih-Ge-AsX"/>
@@ -1320,7 +1320,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="2BY-t7-4Eo" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="nKY-vj-4Dg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nKY-vj-4Dg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1338,7 +1338,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TEZ-H8-lnO" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CDV-4c-dia">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CDV-4c-dia">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

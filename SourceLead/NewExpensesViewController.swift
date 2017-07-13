@@ -14,12 +14,46 @@ class NewExpensesViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var endButton: UIButton!
     @IBOutlet weak var projectButton: UIButton!
+    var expanseuserID      = Int()
+    var exlocationCode     = String()
 
     var selectedDateButton = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let data = StorageData.object(forKey: "MAIN_RESPONSE") else {
+            return
+        }
+        guard let result = NSKeyedUnarchiver.unarchiveObject(with: data as! Data) as? Dictionary<String , AnyObject> else {
+            return
+        }
+        
+        //let result = StorageData.value(forKey: "MAIN_RESPONSE") as? Dictionary<String , AnyObject>
+        
+        guard let mainResponseArc = MainResponse(json: result) else {
+            print("--------------Error-------------")
+            return
+        }
+        
+        self.expanseuserID       = (mainResponseArc.userId)! as Int
+        
+       
+        //for time being added
+        
+        for orgList in mainResponseArc.locationList! as [LocationList] {
+            if orgList.isPrimaryOrg == "Y" {
+             
+                self.exlocationCode           = orgList.locationCode!
+            }
+        }
+        
+        
+        //
+        let tokenvalue = StorageData.object(forKey: "TOKEN")
 
+       
+        print("---------------------------",expanseuserID,exlocationCode,tokenvalue!)
+      expenseApi() 
     }
     
     override func viewDidLayoutSubviews() {
@@ -45,9 +79,9 @@ class NewExpensesViewController: UIViewController {
                 .setSelectedDate(Date())
                 .setMaximumDate(maxDate)
                 .setMinimumDate(minDate)
-                .setDoneButton(action: { popover, selectedDate in print("selectedDate \(selectedDate)")
+                .setDoneButton(color: UIColor.white, action: { popover, selectedDate in print("selectedDate \(selectedDate)")
                     self.startButton.setTitle("\(Global.stringFromDate(dateValue: selectedDate))", for: .normal)})
-                .setCancelButton(action: { v in print("cancel")})
+                .setCancelButton(color: UIColor.white, action: { v in print("cancel")})
                 .appear(originView: startButton, baseViewController: self)
             
         }else {
@@ -60,9 +94,9 @@ class NewExpensesViewController: UIViewController {
                 .setSelectedDate(Date())
                 .setMaximumDate(maxDate)
                 .setMinimumDate(minDate)
-                .setDoneButton(action: { popover, selectedDate in print("selectedDate \(selectedDate)")
+                .setDoneButton(color: UIColor.white, action: { popover, selectedDate in print("selectedDate \(selectedDate)")
                 self.endButton.setTitle("\(Global.stringFromDate(dateValue: selectedDate))", for: .normal)})
-                .setCancelButton(action: { v in print("cancel")
+                .setCancelButton(color: UIColor.white, action: { v in print("cancel")
                 })
                 .appear(originView: endButton, baseViewController: self)
         }
@@ -71,14 +105,24 @@ class NewExpensesViewController: UIViewController {
     @IBAction func projectPickerButtonAction(_ sender: UIButton) {
         StringPickerPopover(title: "Select Project", choices: ["Project 1","Project 2","Project 3"])
             .setSelectedRow(0)
-            .setDoneButton(action: { (popover, selectedRow, selectedString) in
+            .setDoneButton(color: UIColor.white, action: { (popover, selectedRow, selectedString) in
                 print("done row \(selectedRow) \(selectedString)")
                 self.projectButton.setTitle(selectedString, for: .normal)
             })
-            .setCancelButton(action: { v in print("cancel")}
+            .setCancelButton(color: UIColor.white, action: { v in print("cancel")}
             )
             .appear(originView: projectButton, baseViewController: self)
     }
+    func showAlertMessage(title : String, message : String) -> Void {
+        DispatchQueue.main.async{ [weak self] in
+            let alert = Global.showAlertWithTitle(title: title, okTitle: "Ok", cancelTitle: "", message: message, isCancel: false, okHandler: {action in
+                
+                return
+            })
+            self?.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     
     
     /*
@@ -106,3 +150,45 @@ extension NewExpensesViewController : UITableViewDataSource {
         return cell
     }
 }
+extension NewExpensesViewController {
+    func expenseApi() {
+        let tokenvalue = StorageData.object(forKey: "TOKEN")
+       
+        
+        
+    
+         let parameter : [String : AnyObject] = [
+         "userId" :expanseuserID as Int as AnyObject,
+         "locationCode" :exlocationCode as AnyObject 
+         
+         ]
+        //let url = BASE_URL +  "restAuthenticate"
+        let url = "http://192.168.1.14:8080/sourcelead/rest/getExpenseEntryDetails"
+        var data : Data
+         do {
+         data = try JSONSerialization.data(withJSONObject:parameter, options:[])
+         
+         }catch {
+         print("JSON serialization failed:  \(error)")
+         showAlertMessage(title: "Error", message: "Error in sending data")
+         return
+         }
+        let headers : [String : AnyObject] = ["Content-Type" : "application/json" as AnyObject, "X-CustomToken" : tokenvalue as AnyObject]
+        WebServices.sharedInstance.performApiCallWithURLString(urlString: url, methodName: "POST", headers: headers, parameters: nil, httpBody: data, withMessage: "Loading...", alertMessage: "Please check your device settings to ensure you have a working internet connection.", fromView: self.view, successHandler:  {[weak self] json, response in
+            if let result = json as? Dictionary<String , AnyObject> {
+                
+                /*guard let mainResponseArc = MainResponse(json: result) else {
+                 print("--------------Error-------------")
+                 return
+                 }*/
+                print(result)
+                
+                
+            }else {
+                self?.showAlertMessage(title : "Problem" , message: "Issue in API Response.")
+            }
+            }, failureHandler: { response, error in
+                //print("ERROR IS : \(error)")
+        })
+    }}
+

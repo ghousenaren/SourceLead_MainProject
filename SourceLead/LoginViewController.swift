@@ -109,7 +109,7 @@ extension LoginViewController {
             "password":passwordTextField.text!
         ]
         //let url = BASE_URL +  "restAuthenticate"
-        let url = "http://192.168.1.53:8080/sourcelead/restAuthenticate"
+        let url = "http://192.168.1.14:8080/sourcelead/restAuthenticate"
         var data : Data
         do {
             data = try JSONSerialization.data(withJSONObject:parameter, options:[])

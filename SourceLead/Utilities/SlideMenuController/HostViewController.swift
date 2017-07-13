@@ -88,12 +88,14 @@ class HostViewController: MenuContainerViewController {
         
         var controllersIdentifiers = [String]()
         
-        if let mainResponse = mainResponseArc as? MainResponse {
-            controllersIdentifiers       = (mainResponse.locationList?.vukPin?.menuList)!
+        for orgList in mainResponseArc.locationList! as [LocationList] {
+            if orgList.isPrimaryOrg == "Y" {
+               controllersIdentifiers       = orgList.menuList!
+                break
+            }
         }
         
-        
-
+ 
         /*
          Instantiate items controllers from storyboard.
          */

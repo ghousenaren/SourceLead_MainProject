@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         IQKeyboardManager.shared().isEnabled = true
         UINavigationBar.appearance().barTintColor = UIColor(red: 22.0/255.0, green: 111.0/255.0, blue: 192.0/255.0, alpha: 1.0)
-        //switchScreens()
-        createMenuView()
+        switchScreens()
+        //createMenuView()
         return true
 
         // Override point for customization after application launch.
@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     }
     
     func createMenuView() {
-        
+        clearStorageData()
         let storyboard = UIStoryboard(name: "MainHome", bundle: nil)
         let hostViewController = storyboard.instantiateViewController(withIdentifier: "HostViewController") as! HostViewController
          DispatchQueue.main.async{
@@ -69,7 +69,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             self.window?.makeKeyAndVisible()
         }
     }
-
+    func clearStorageData() {
+        StorageData.removeObject(forKey: "MAIN_RESPONSE")
+    }
 
 }
 // MARK: GIDSignInDelegate
