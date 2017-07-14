@@ -11,14 +11,31 @@ import SwiftyPickerPopover
 
 
 class AddCategoryViewController: UIViewController {
+    let projectmemberlistObj = [projectMembersList]()
+    var mainExpensesResponse: ExpensesResponse!
+
     @IBOutlet weak var catagoryButton: UIButton!
 
     @IBOutlet weak var paymentmodeButton: UIButton!
     @IBOutlet weak var dateButton: UIButton!
+    
+    @IBOutlet weak var CurrencyButton: UIButton!
+    var currencySymbolsArray = [String]()
+    var categoryArray = [String]()
+    var paymentModeArray = [String]()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        currencySymbolsArray = mainExpensesResponse.currencyCodeList as! [String]
+        paymentModeArray     = mainExpensesResponse.paymentModes as! [String]
+        for categoryName in mainExpensesResponse.expenseCategoryList! {
+            categoryArray.append(categoryName.expensesName!)
+          
+        }
+//       for paymentmode in mainExpensesResponse.expenseCategoryList!.{
+//           paymentModeArray.append(categoryName.expensesName!)
+//        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,7 +47,7 @@ class AddCategoryViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func catagoryPickerButtonAction(_ sender: UIButton) {
-        StringPickerPopover(title: "Select Catagory", choices: ["Catagory 1","Catagory 2","Catagory 3"])
+        StringPickerPopover(title: "Select Catagory", choices: categoryArray)
             .setSelectedRow(0)
             .setDoneButton(color: UIColor.white, action: { (popover, selectedRow, selectedString) in
                 print("done row \(selectedRow) \(selectedString)")
@@ -41,7 +58,7 @@ class AddCategoryViewController: UIViewController {
             .appear(originView: catagoryButton, baseViewController: self)
     }
     @IBAction func paymentPickerButtonAction(_ sender: UIButton) {
-        StringPickerPopover(title: "Select PaymentMode", choices: ["PaymentMode 1","PaymentMode 2","PaymentMode 3"])
+        StringPickerPopover(title: "Select PaymentMode", choices: paymentModeArray)
             .setSelectedRow(0)
             .setDoneButton(color: UIColor.white, action: { (popover, selectedRow, selectedString) in
                 print("done row \(selectedRow) \(selectedString)")
@@ -51,7 +68,19 @@ class AddCategoryViewController: UIViewController {
             )
             .appear(originView: paymentmodeButton, baseViewController: self)
     }
+    
+    
 
+    @IBAction func currencyMode(_ sender: Any) {
+        StringPickerPopover(title: "", choices: currencySymbolsArray)
+            .setSelectedRow(0)
+            .setSize(width: 100, height: 150)
+            .setDoneButton(color: UIColor.white, action: { (popover, selectedRow, selectedString) in
+                print("done row \(selectedRow) \(selectedString)")
+                self.CurrencyButton.setTitle(selectedString, for: .normal)
+            })
+            .appear(originView: CurrencyButton, baseViewController: self)
+    }
 
  
     @IBAction func datePickerButtonAction(_ sender: Any) {
@@ -74,6 +103,7 @@ class AddCategoryViewController: UIViewController {
 
         
     }
+   
     /*
     // MARK: - Navigation
 

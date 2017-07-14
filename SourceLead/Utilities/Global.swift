@@ -26,7 +26,13 @@ class Global: NSObject {
     
     class func dateFromString(dateString : String) -> Date {
         let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)
-        let DateArray = dateString.components(separatedBy: "/")
+        var   separater = ""
+        if dateString.contains("/") {
+            separater = "/"
+        }else {
+            separater = "-"
+        }
+        let DateArray = dateString.components(separatedBy: separater)
         let components = NSDateComponents()
         components.year = Int(DateArray[2])!
         components.month = Int(DateArray[1])!
@@ -41,7 +47,8 @@ class Global: NSObject {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let myString = formatter.string(from: dateValue as Date)
         let yourDate: Date? = formatter.date(from: myString)
-        formatter.dateFormat = "dd MMM, yyyy"
+        //formatter.dateFormat = "dd MMM, yyyy"
+        formatter.dateFormat = "dd-mm-yyyy"
         //print(yourDate!)
         return  formatter.string(from: yourDate!)
     }

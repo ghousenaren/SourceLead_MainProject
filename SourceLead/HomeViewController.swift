@@ -94,7 +94,7 @@ extension HomeViewController {
          "token" :tokenvalue as! String
          ]*/
         //let url = BASE_URL +  "restAuthenticate"
-        let url = "http://192.168.1.14:8080/sourcelead/rest/loginUserProfile"
+        let url = "http://192.168.1.8:8080/sourcelead/rest/loginUserProfile"
         /*var data : Data
          do {
          data = try JSONSerialization.data(withJSONObject:parameter, options:[])

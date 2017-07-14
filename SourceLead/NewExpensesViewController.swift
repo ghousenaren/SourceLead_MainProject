@@ -11,13 +11,29 @@ import SwiftyPickerPopover
 
 class NewExpensesViewController: UIViewController {
 
+    @IBOutlet weak var expenseidTxt: UITextField!
+    @IBOutlet weak var purpuseTxt: UITextField!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var endButton: UIButton!
     @IBOutlet weak var projectButton: UIButton!
+    
+    @IBOutlet weak var clientNameDropMenu: DropMenuButton!
+    @IBOutlet weak var datePickerHolderStackView: UIStackView!
+    
+    var mainExpensesResponse: ExpensesResponse!
     var expanseuserID      = Int()
     var exlocationCode     = String()
-
+    var projectNameArray       = [String]()
+    var clientNameArray     =   [String]()
+    var expenseCategoryArray    = [expenseCategoryList]()
     var selectedDateButton = ""
+    //Display in expenses
+    var expendeID = String()
+   var ProjectID =  Int()
+   var projectNames       = [String]()
+    var startdate   =  String()
+    var enddate      =  String()
+   var clintnames    = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,19 +50,15 @@ class NewExpensesViewController: UIViewController {
             print("--------------Error-------------")
             return
         }
-        
         self.expanseuserID       = (mainResponseArc.userId)! as Int
-        
        
         //for time being added
         
         for orgList in mainResponseArc.locationList! as [LocationList] {
             if orgList.isPrimaryOrg == "Y" {
-             
-                self.exlocationCode           = orgList.locationCode!
+               self.exlocationCode           = orgList.locationCode!
             }
         }
-        
         
         //
         let tokenvalue = StorageData.object(forKey: "TOKEN")
@@ -64,13 +76,22 @@ class NewExpensesViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "fromnewtoadd" {
+           var addCategoryVC = segue.destination as! AddCategoryViewController
+            addCategoryVC.mainExpensesResponse = self.mainExpensesResponse
+        }
+    }
     @IBAction func calendarDateButtonAction(_ sender: UIButton) {
-        let startDateFromJson = "01/03/2017"
-        let endDateFromJson   = "01/08/2017"
+        let startDateFromJson = self.startdate
+        var endDateFromJson   = self.enddate
+        if endDateFromJson.characters.count < 2 {
+            endDateFromJson  = "12-12-2020" //setting max date bcoz picker has to given max date
+        }
         
         if sender.tag == 0 {
             let minDate = Global.dateFromString(dateString: startDateFromJson)
+            
             let maxDate = Global.dateFromString(dateString: endDateFromJson)
                         
             selectedDateButton = "start"
@@ -82,8 +103,7 @@ class NewExpensesViewController: UIViewController {
                 .setDoneButton(color: UIColor.white, action: { popover, selectedDate in print("selectedDate \(selectedDate)")
                     self.startButton.setTitle("\(Global.stringFromDate(dateValue: selectedDate))", for: .normal)})
                 .setCancelButton(color: UIColor.white, action: { v in print("cancel")})
-                .appear(originView: startButton, baseViewController: self)
-            
+                .appear(originView: startButton, baseViewWhenOriginViewHasNoSuperview: datePickerHolderStackView, baseViewController: self)
         }else {
             selectedDateButton = "end"
             let minDate = Global.dateFromString(dateString: startDateFromJson)
@@ -98,16 +118,17 @@ class NewExpensesViewController: UIViewController {
                 self.endButton.setTitle("\(Global.stringFromDate(dateValue: selectedDate))", for: .normal)})
                 .setCancelButton(color: UIColor.white, action: { v in print("cancel")
                 })
-                .appear(originView: endButton, baseViewController: self)
+                .appear(originView: endButton, baseViewWhenOriginViewHasNoSuperview: datePickerHolderStackView, baseViewController: self)
         }
     }
 
     @IBAction func projectPickerButtonAction(_ sender: UIButton) {
-        StringPickerPopover(title: "Select Project", choices: ["Project 1","Project 2","Project 3"])
+        StringPickerPopover(title: "Select Project", choices:projectNameArray)
             .setSelectedRow(0)
             .setDoneButton(color: UIColor.white, action: { (popover, selectedRow, selectedString) in
                 print("done row \(selectedRow) \(selectedString)")
                 self.projectButton.setTitle(selectedString, for: .normal)
+                self.clientNameDropMenu.setTitle(self.clientNameArray[selectedRow], for: .normal)
             })
             .setCancelButton(color: UIColor.white, action: { v in print("cancel")}
             )
@@ -122,20 +143,8 @@ class NewExpensesViewController: UIViewController {
             self?.present(alert, animated: true, completion: nil)
         }
     }
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
+    //Add functions
+   }
 
 extension NewExpensesViewController : UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -151,6 +160,7 @@ extension NewExpensesViewController : UITableViewDataSource {
     }
 }
 extension NewExpensesViewController {
+    
     func expenseApi() {
         let tokenvalue = StorageData.object(forKey: "TOKEN")
        
@@ -163,7 +173,7 @@ extension NewExpensesViewController {
          
          ]
         //let url = BASE_URL +  "restAuthenticate"
-        let url = "http://192.168.1.14:8080/sourcelead/rest/getExpenseEntryDetails"
+        let url = "http://192.168.1.8:8080/sourcelead/rest/getExpenseEntryDetails"
         var data : Data
          do {
          data = try JSONSerialization.data(withJSONObject:parameter, options:[])
@@ -182,6 +192,36 @@ extension NewExpensesViewController {
                  return
                  }*/
                 print(result)
+                guard let expenseObject = ExpensesResponse(json: result) else {
+                    print("--------------Error-------------")
+                    return
+                }
+                
+                self?.mainExpensesResponse = expenseObject
+                self?.expenseidTxt.text = expenseObject.expenseId!
+                self?.expenseCategoryArray = expenseObject.expenseCategoryList!
+                for orgList in expenseObject.projectMembersList! as [projectMembersList] {
+                    self?.ProjectID =  orgList.projectMembersListid!
+                    self?.projectNameArray.append(orgList.projectName!)    //   = [orgList.projectName!]
+                    self?.startdate   =  orgList.projectStartDate!
+                    self?.enddate      =  ""
+                    if let endDate = orgList.projectEndDate {
+                        self?.enddate = endDate
+                    }
+                    if let clientName = orgList.clientName {
+                        self?.clientNameArray.append(clientName)
+                    }else {
+                        self?.clientNameArray.append("")
+                    }
+                    /*if let clientName = orgList.clientName {
+                        self?.clintnames  = clientName
+                    }*/
+                    
+                    //self?.clintnames  = ["orgList.clientName!"]
+
+//                    StorageData.set(exlocationCode, forKey: "LOCATIONCODE")
+                }
+                
                 
                 
             }else {

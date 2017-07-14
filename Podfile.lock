@@ -66,7 +66,7 @@ PODS:
   - MBProgressHUD (1.0.0)
   - moa (8.0.4)
   - ReachabilitySwift (3)
-  - SwiftyPickerPopover (4.2.0)
+  - SwiftyPickerPopover (5.1.0)
 
 DEPENDENCIES:
   - FacebookCore
@@ -105,7 +105,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   moa: 954e2ad962886626d02c3486dd3a7bb5f0052d14
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
-  SwiftyPickerPopover: df5579ce04e88970f2adff8acbcfe76da6ee917c
+  SwiftyPickerPopover: 6fac885261a8fae25ccf7de41af27ae80c185508
 
 PODFILE CHECKSUM: 5dfa1a0820741b430be8b0ca8c3d9713d60c2e8f
 

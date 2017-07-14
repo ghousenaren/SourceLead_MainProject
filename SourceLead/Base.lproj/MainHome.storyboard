@@ -2583,8 +2583,8 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIo-bN-izE">
                                                         <rect key="frame" x="0.0" y="0.0" width="179.5" height="30"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnH-qY-GI8">
-                                                                <rect key="frame" x="0.0" y="0.0" width="150" height="32"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnH-qY-GI8">
+                                                                <rect key="frame" x="0.0" y="5" width="95" height="22"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <state key="normal" title="Start Date">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -2663,7 +2663,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="x2S-z0-6am" kind="presentation" id="m0b-rD-Ch9"/>
+                                            <segue destination="x2S-z0-6am" kind="presentation" identifier="fromnewtoadd" id="m0b-rD-Ch9"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2691,8 +2691,12 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
+                        <outlet property="clientNameDropMenu" destination="dmM-7t-Ud3" id="dhE-YQ-OR0"/>
+                        <outlet property="datePickerHolderStackView" destination="toD-mX-NTA" id="dlr-5m-AQU"/>
                         <outlet property="endButton" destination="VmG-JQ-WBY" id="Vf0-Bm-iAg"/>
+                        <outlet property="expenseidTxt" destination="xss-ZJ-yT3" id="oAU-Le-Q1b"/>
                         <outlet property="projectButton" destination="33M-hC-9m2" id="0fR-aZ-aBK"/>
+                        <outlet property="purpuseTxt" destination="YMn-vT-8eY" id="fbn-Md-x76"/>
                         <outlet property="startButton" destination="qnH-qY-GI8" id="WkY-yF-OtF"/>
                     </connections>
                 </viewController>
@@ -2839,12 +2843,27 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tD7-rN-2Wb">
-                                                                <rect key="frame" x="0.0" y="13" width="168" height="30"/>
+                                                                <rect key="frame" x="79" y="13" width="89" height="30"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EnQ-c2-lWs">
+                                                                <rect key="frame" x="-4" y="17" width="26" height="22"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <state key="normal" title="Button" image="ic_arrow_drop_down"/>
+                                                                <connections>
+                                                                    <action selector="currencyMode:" destination="x2S-z0-6am" eventType="touchUpInside" id="d7Y-7G-FXE"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRA-iA-liw">
+                                                                <rect key="frame" x="35" y="13" width="46" height="30"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <state key="normal" title="INR">
+                                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                </state>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </view>
@@ -2859,13 +2878,16 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose File" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMd-U3-45h">
-                                                                <rect key="frame" x="8" y="15" width="150" height="21"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ka-9J-mqA">
+                                                                <rect key="frame" x="32" y="8" width="50" height="33"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                                <state key="normal" title="Button" image="ic_attach_file"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcK-E9-3EI">
+                                                                <rect key="frame" x="119" y="10" width="50" height="33"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <state key="normal" title="Button" image="ic_camera_alt"/>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </view>
@@ -2895,7 +2917,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XOg-rP-PKC">
                                         <rect key="frame" x="196" y="374" width="160" height="40"/>
                                         <color key="backgroundColor" red="0.17548516389999999" green="0.5215887427" blue="0.84174269440000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="OK">
+                                        <state key="normal" title="Save">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
@@ -2948,6 +2970,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="CurrencyButton" destination="tRA-iA-liw" id="Zmt-kH-YVa"/>
                         <outlet property="catagoryButton" destination="gSZ-4H-M96" id="dad-oM-i88"/>
                         <outlet property="dateButton" destination="GoY-tJ-udG" id="K1i-5J-fTO"/>
                         <outlet property="paymentmodeButton" destination="mdP-fV-zkf" id="GrN-Mg-Nix"/>
@@ -2962,6 +2985,9 @@
         <image name="back_arrow" width="96" height="96"/>
         <image name="expenses_icon" width="35" height="35"/>
         <image name="filter_icon" width="50" height="50"/>
+        <image name="ic_arrow_drop_down" width="24" height="24"/>
+        <image name="ic_attach_file" width="24" height="24"/>
+        <image name="ic_camera_alt" width="24" height="24"/>
         <image name="ic_home_icon" width="22" height="22"/>
         <image name="ic_logout_icon" width="22" height="22"/>
         <image name="ic_notification_icon" width="22" height="22"/>

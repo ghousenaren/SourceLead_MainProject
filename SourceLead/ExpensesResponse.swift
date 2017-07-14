@@ -8,7 +8,7 @@
 
 import Gloss
 struct ExpensesResponse : Decodable {
-     let expenseId : Int?
+    let expenseId : String?
     let currencyCode : String?
     let projectMembersList : [projectMembersList]?
     let expenseCategoryList : [expenseCategoryList]?
@@ -31,7 +31,7 @@ struct projectMembersList : Decodable {
     let projectName : String?
     let projectStartDate : String?
     let projectEndDate : String?
-    let clientName : Array<String>?
+    let clientName : String?
     
     // MARK: - Deserialization
     init?(json: JSON) {
