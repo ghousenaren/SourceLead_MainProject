@@ -10,7 +10,7 @@ import UIKit
 import SwiftyPickerPopover
 
 
-class AddCategoryViewController: UIViewController {
+class AddCategoryViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     let projectmemberlistObj = [projectMembersList]()
     var mainExpensesResponse: ExpensesResponse!
 
@@ -102,6 +102,34 @@ class AddCategoryViewController: UIViewController {
                .appear(originView: dateButton, baseViewController: self)
 
         
+    }
+    //
+    @IBAction func pickPhoto(_ sender: AnyObject) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        
+    }
+    @IBAction func takePhoto(_ sender: AnyObject) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
    
     /*

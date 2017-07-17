@@ -2882,11 +2882,17 @@
                                                                 <rect key="frame" x="32" y="8" width="50" height="33"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <state key="normal" title="Button" image="ic_attach_file"/>
+                                                                <connections>
+                                                                    <action selector="pickPhoto:" destination="x2S-z0-6am" eventType="touchUpInside" id="GlP-zR-Lcp"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcK-E9-3EI">
                                                                 <rect key="frame" x="119" y="10" width="50" height="33"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <state key="normal" title="Button" image="ic_camera_alt"/>
+                                                                <connections>
+                                                                    <action selector="takePhoto:" destination="x2S-z0-6am" eventType="touchUpInside" id="gP4-T1-CfZ"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
