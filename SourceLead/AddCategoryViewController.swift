@@ -92,23 +92,23 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
  
      */
     func validate() -> Bool {
-        guard self.categoryTypeLabel.text.length > 2 else {
+        guard (self.categoryTypeLabel.text?.characters.count)! > 2 else {
             showAlert(withMessage : "category type should be selected")
             return false
         }
-        guard self.dateLabel.text.character.length > 2  != nil else {
+        guard (self.dateLabel.text?.characters.count)! > 2   else {
             showAlert(withMessage : "Date should be selected")
             return false
         }
-        guard self.paymentModeLabel.text.character.length > 2  != nil else {
+        guard (self.paymentModeLabel.text?.characters.count)! > 2  else {
             showAlert(withMessage : "Payment mode should be selected")
             return false
         }
-        guard self.amountTextField.text.character.length > 2  != nil else {
+        guard (self.amountTextField.text?.characters.count)! > 2 else {
             showAlert(withMessage : "Kindly enter the amount")
             return false
         }
-        guard self.receiptIssuedByTextField.text.character.length > 2  != nil else {
+        guard (self.receiptIssuedByTextField.text?.characters.count)! > 2  else {
             showAlert(withMessage : "Kindly mention receipt issued by")
             return false
         }
@@ -118,7 +118,9 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
     
     func showAlert(withMessage : String) {
         DispatchQueue.main.async{ [weak self] in
-            let alert = Global.showAlertWithTitle(title: "", okTitle: "OK", cancelTitle: nil, message: withMessage, isCancel: false, okHandler: nil)
+            let alert = Global.showAlertWithTitle(title: "", okTitle: "OK", cancelTitle: nil, message: withMessage, isCancel: false, okHandler:{action in
+            })
+
             self?.present(alert, animated: true, completion: nil)
         }
     }

@@ -75,7 +75,7 @@ class NewExpensesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard let categoryArray  = StorageData.value(forKey: "EPENSES_JSON")  else {
+        guard let categoryArray  = StorageData.value(forKey: "EXPENSES_JSON")  else {
             return
         }
         categoryTableArray = categoryArray as! [Dictionary<AnyHashable, Any>]
@@ -102,7 +102,17 @@ class NewExpensesViewController: UIViewController {
     }
     
     @IBAction func saveButtonAction(_ sender: UIButton) {
+        let saveExpensesJSON = ["categoryDTOList"   :  self.categoryTableArray,
+                               "clientName"         :  self.clientNameDropMenu.title,
+                               "id"                 :  self.expenseidTxt.text ,
+                               "projectEndDate"     :  self.endButton.title ,
+                               "projectName"        :  self.projectButton.title,
+                               "projectStartDate"   :  self.startButton.title,
+                               "purpose" :  self.purpuseTxt.text ?? ""
+                               
+            ] as? [String:AnyObject]
         
+        print(saveExpensesJSON)
     }
     @IBAction func SubmitButtonAction(_ sender: UIButton) {
         
