@@ -72,7 +72,9 @@ class NewExpensesViewController: UIViewController {
         super.viewDidLayoutSubviews()
 
     }
-    
+    @IBAction func unwindToNewExpensesController(segue: UIStoryboardSegue) {
+        print("Unwind to New Expenses VC")
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
