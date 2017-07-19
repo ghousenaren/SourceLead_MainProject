@@ -31,18 +31,20 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var paymentModeLabel: UILabel!
     @IBOutlet weak var currencySelectedLabel: UILabel!
+    @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var receiptIssuedByTextField: UITextField!
     @IBOutlet weak var imageHolderView: UIView!
     @IBOutlet weak var imageStackView: UIStackView!
+    @IBOutlet weak var descriptionTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       currencySymbolsArray = mainExpensesResponse.currencyCodeList as! [String]
+      /* currencySymbolsArray = mainExpensesResponse.currencyCodeList as! [String]
        paymentModeArray     = mainExpensesResponse.paymentModes as! [String]
        for categoryName in mainExpensesResponse.expenseCategoryList! {
             categoryArray.append(categoryName.expensesName!)
           
-        }
+        }*/
 //       for paymentmode in mainExpensesResponse.expenseCategoryList!.{
 //           paymentModeArray.append(categoryName.expensesName!)
 //        }
@@ -52,7 +54,75 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
     @IBAction func backCancelButtonAction(_ sender: UIButton) {
     
     }
+    @IBAction func saveButtonAction(_ sender: UIButton) {
+        if validate() {
+            
+            //Need to added Expenses Id and a auto Id for this
+            let addExpensesJson = ["cateogyType" :  self.categoryTypeLabel.text ?? "",
+                                   "date"        :  self.dateLabel.text ?? "",
+                                   "paymentMode" :  self.paymentModeLabel.text ?? "",
+                                   "amount"      :  self.amountTextField.text ?? "",
+                                   "currency"    :  self.currencySelectedLabel.text ?? "",
+                                   "receiptBy"   :  self.receiptIssuedByTextField.text ?? "",
+                                   "description" :  self.descriptionTextView.text ?? "",
+                                   "attachments" :  imageCollectionArray
+            ] as? [String:AnyObject]
+        
+            guard var allExpensesRecordsArray  = StorageData.value(forKey: "EPENSES_JSON") as? [[String : AnyObject]]  else {
+                let newExpensesArray = [addExpensesJson]
+                StorageData.set(newExpensesArray, forKey : "EXPENSES_JSON")
+                return
+            }
+            allExpensesRecordsArray.append(addExpensesJson!)
+            StorageData.set(allExpensesRecordsArray, forKey : "EXPENSES_JSON")
+            
+            self.performSegue(withIdentifier: "unwindToNewExpensesController", sender: self)
+        }
+    }
 
+    /*
+     "amount":"123",
+     "attachments":[  ],
+     "categoryType":"Snacks",
+     "currency":"INR",
+     "date":"18/7/2017 ",
+     "description":"test",
+     "paymentMode":"Credit Card",
+     "receiptBy":"test"
+ 
+     */
+    func validate() -> Bool {
+        guard self.categoryTypeLabel.text.length > 2 else {
+            showAlert(withMessage : "category type should be selected")
+            return false
+        }
+        guard self.dateLabel.text.character.length > 2  != nil else {
+            showAlert(withMessage : "Date should be selected")
+            return false
+        }
+        guard self.paymentModeLabel.text.character.length > 2  != nil else {
+            showAlert(withMessage : "Payment mode should be selected")
+            return false
+        }
+        guard self.amountTextField.text.character.length > 2  != nil else {
+            showAlert(withMessage : "Kindly enter the amount")
+            return false
+        }
+        guard self.receiptIssuedByTextField.text.character.length > 2  != nil else {
+            showAlert(withMessage : "Kindly mention receipt issued by")
+            return false
+        }
+        
+    return true
+    }
+    
+    func showAlert(withMessage : String) {
+        DispatchQueue.main.async{ [weak self] in
+            let alert = Global.showAlertWithTitle(title: "", okTitle: "OK", cancelTitle: nil, message: withMessage, isCancel: false, okHandler: nil)
+            self?.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -84,8 +154,6 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
             .appear(originView: paymentmodeButton, baseViewController: self)
     }
     
-    
-
     @IBAction func currencyMode(_ sender: Any) {
         StringPickerPopover(title: "", choices: currencySymbolsArray)
             .setSelectedRow(0)
@@ -102,20 +170,19 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
         let startDateFromJson = "01/03/2017"
         let endDateFromJson   = "01/08/2017"
         
+        let minDate = Global.dateFromString(dateString: startDateFromJson)
+        let maxDate = Global.dateFromString(dateString: endDateFromJson)
         
-            let minDate = Global.dateFromString(dateString: startDateFromJson)
-            let maxDate = Global.dateFromString(dateString: endDateFromJson)
-            
-            DatePickerPopover(title: "Select Start Date")
-                .setDateMode(.date)
-                .setSelectedDate(Date())
-                .setMaximumDate(maxDate)
-                .setMinimumDate(minDate)
-                .setDoneButton(color: UIColor.white, action: { popover, selectedDate in print("selectedDate \(selectedDate)")
-                    self.dateLabel.text = "\(Global.stringFromDate(dateValue: selectedDate))"
-                })
-                .setCancelButton(color: UIColor.white, action: { v in print("cancel")})
-               .appear(originView: dateButton, baseViewController: self)
+        DatePickerPopover(title: "Select Start Date")
+            .setDateMode(.date)
+            .setSelectedDate(Date())
+            .setMaximumDate(maxDate)
+            .setMinimumDate(minDate)
+            .setDoneButton(color: UIColor.white, action: { popover, selectedDate in print("selectedDate \(selectedDate)")
+                self.dateLabel.text = "\(Global.stringFromDate(dateValue: selectedDate))"
+            })
+            .setCancelButton(color: UIColor.white, action: { v in print("cancel")})
+           .appear(originView: dateButton, baseViewController: self)
 
         
     }
@@ -134,6 +201,10 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
     }
     
     @IBAction func cameraButtonAction(_ sender: UIButton) {
+        if imageCollectionArray.count > 2 {
+            showAlert(withMessage :"Max 3 screenshots")
+            return
+        }
         handlingAlertActions()
     }
     

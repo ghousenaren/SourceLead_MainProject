@@ -20,12 +20,16 @@ class NewExpensesViewController: UIViewController {
     @IBOutlet weak var clientNameDropMenu: DropMenuButton!
     @IBOutlet weak var datePickerHolderStackView: UIStackView!
     
+    @IBOutlet weak var categoryTableView: UITableView!
+    var categoryTableArray = [[:]]
     var mainExpensesResponse: ExpensesResponse!
     var expanseuserID      = Int()
     var exlocationCode     = String()
     var projectNameArray       = [String]()
     var clientNameArray     =   [String]()
     var expenseCategoryArray    = [expenseCategoryList]()
+    
+    
     var selectedDateButton = ""
     //Display in expenses
     var expendeID = String()
@@ -34,6 +38,7 @@ class NewExpensesViewController: UIViewController {
     var startdate   =  String()
     var enddate      =  String()
    var clintnames    = [String]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +73,17 @@ class NewExpensesViewController: UIViewController {
       expenseApi() 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard let categoryArray  = StorageData.value(forKey: "EPENSES_JSON")  else {
+            return
+        }
+        categoryTableArray = categoryArray as! [Dictionary<AnyHashable, Any>]
+         DispatchQueue.main.async{ [weak self] in
+                self?.categoryTableView.reloadData()
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
@@ -84,6 +100,15 @@ class NewExpensesViewController: UIViewController {
             addCategoryVC.mainExpensesResponse = self.mainExpensesResponse
         }
     }
+    
+    @IBAction func saveButtonAction(_ sender: UIButton) {
+        
+    }
+    @IBAction func SubmitButtonAction(_ sender: UIButton) {
+        
+    }
+    
+    
     @IBAction func calendarDateButtonAction(_ sender: UIButton) {
         let startDateFromJson = self.startdate
         var endDateFromJson   = self.enddate
@@ -148,19 +173,6 @@ class NewExpensesViewController: UIViewController {
     //Add functions
    }
 
-extension NewExpensesViewController : UITableViewDataSource {
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 0
-    }
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell : NewExpenseTableViewCell = tableView.dequeueReusableCell(withIdentifier: "addExpensesCell", for: indexPath) as! NewExpenseTableViewCell
-        //if indexPath.row == 1 {
-            let cell: NewExpenseTableViewCell = tableView.dequeueReusableCell(withIdentifier: "expensesCell", for: indexPath) as! NewExpenseTableViewCell
-        //}
-        
-        return cell
-    }
-}
 extension NewExpensesViewController {
     
     func expenseApi() {
@@ -232,5 +244,31 @@ extension NewExpensesViewController {
             }, failureHandler: { response, error in
                 //print("ERROR IS : \(error)")
         })
-    }}
+    }
+}
+
+extension NewExpensesViewController : UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You selected cell #\(indexPath.row)!")
+    }
+}
+
+extension NewExpensesViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
+        return categoryTableArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let categoryCell = categoryTableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryTableViewCell
+        
+        let categoryDict = categoryTableArray[indexPath.row]
+        categoryCell.titleBarLabel.text = categoryDict["categoryType"] as? String
+        categoryCell.amountLabel.text   = "\(String(describing: categoryDict["currency"])) \(String(describing: categoryDict["amount"]))"
+        categoryCell.dateLabel.text = categoryDict["date"] as? String
+        return categoryCell
+    }
+}
 

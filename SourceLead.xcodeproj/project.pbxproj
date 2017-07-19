@@ -61,6 +61,7 @@
 		647842321F06143000066738 /* HostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6478422E1F06143000066738 /* HostViewController.swift */; };
 		647842341F06143000066738 /* NavigationMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647842301F06143000066738 /* NavigationMenuViewController.swift */; };
 		647842351F06143000066738 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647842311F06143000066738 /* TabBarViewController.swift */; };
+		6483D3D31F1F9AFF0075DB58 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483D3D21F1F9AFF0075DB58 /* CategoryTableViewCell.swift */; };
 		64CDFABB1F133953002C528A /* MyExpensesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CDFABA1F133953002C528A /* MyExpensesTableViewCell.swift */; };
 		64CDFABD1F1345A4002C528A /* NewExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CDFABC1F1345A4002C528A /* NewExpensesViewController.swift */; };
 		64CDFABF1F134A1D002C528A /* NewExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CDFABE1F134A1D002C528A /* NewExpenseTableViewCell.swift */; };
@@ -131,6 +132,7 @@
 		6478422E1F06143000066738 /* HostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostViewController.swift; sourceTree = "<group>"; };
 		647842301F06143000066738 /* NavigationMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationMenuViewController.swift; sourceTree = "<group>"; };
 		647842311F06143000066738 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		6483D3D21F1F9AFF0075DB58 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryTableViewCell.swift; path = View/CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		64CDFABA1F133953002C528A /* MyExpensesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyExpensesTableViewCell.swift; path = View/MyExpensesTableViewCell.swift; sourceTree = "<group>"; };
 		64CDFABC1F1345A4002C528A /* NewExpensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExpensesViewController.swift; sourceTree = "<group>"; };
 		64CDFABE1F134A1D002C528A /* NewExpenseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewExpenseTableViewCell.swift; path = View/NewExpenseTableViewCell.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				643B6A781F0CA44E00CA2AE1 /* MenuItemTableViewCell.swift */,
+				6483D3D21F1F9AFF0075DB58 /* CategoryTableViewCell.swift */,
 				64CDFABA1F133953002C528A /* MyExpensesTableViewCell.swift */,
 				64CDFABE1F134A1D002C528A /* NewExpenseTableViewCell.swift */,
 			);
@@ -529,6 +532,7 @@
 				480D3BB91EE0115200545567 /* ForgotViewController.swift in Sources */,
 				647842341F06143000066738 /* NavigationMenuViewController.swift in Sources */,
 				64CDFABF1F134A1D002C528A /* NewExpenseTableViewCell.swift in Sources */,
+				6483D3D31F1F9AFF0075DB58 /* CategoryTableViewCell.swift in Sources */,
 				484E1ABB1EDEF16E0095052A /* Welcome.swift in Sources */,
 				646C4F531EFB92AA00FA4C63 /* UsefulExtensions.swift in Sources */,
 				64CDFABB1F133953002C528A /* MyExpensesTableViewCell.swift in Sources */,
