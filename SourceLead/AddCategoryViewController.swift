@@ -10,7 +10,7 @@ import UIKit
 import SwiftyPickerPopover
 import AVFoundation
 import AVKit
-
+import Photos
 
 class AddCategoryViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate  {
     let projectmemberlistObj = [projectMembersList]()
@@ -26,7 +26,7 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
     var categoryArray = [String]()
     var paymentModeArray = [String]()
     var imageCollectionArray = [UIImage]()
-
+    var imageFilenameArray = [String]()
     @IBOutlet weak var categoryTypeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var paymentModeLabel: UILabel!
@@ -36,6 +36,8 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var imageHolderView: UIView!
     @IBOutlet weak var imageStackView: UIStackView!
     @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var tableViewHeightConstraints: NSLayoutConstraint!
+    @IBOutlet weak var imageTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +67,8 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
                                    "currency"    :  self.currencySelectedLabel.text ?? "",
                                    "receiptBy"   :  self.receiptIssuedByTextField.text ?? "",
                                    "description" :  self.descriptionTextView.text ?? "",
-                                   "attachments" :  imageCollectionArray
+                                   "attachments" :  imageCollectionArray,
+                                   "filenames"   :  imageFilenameArray
             ] as? [String:AnyObject]
         
             guard var allExpensesRecordsArray  = StorageData.value(forKey: "EPENSES_JSON") as? [[String : AnyObject]]  else {
@@ -196,6 +199,18 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
             imageCollectionArray.append(image)
             refreshImageHolderView(image : image)
         }
+        guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else {
+            print("No image chosen")
+            return
+        }
+        
+        let url = info[UIImagePickerControllerReferenceURL] as! URL
+        let assets = PHAsset.fetchAssets(withALAssetURLs: [url], options: nil)
+        let fileName = PHAssetResource.assetResources(for: assets.firstObject!).first!.originalFilename
+        
+        imageFilenameArray.append(fileName)
+        print("File name = \(fileName)")
+
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -245,14 +260,52 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
         
     }
     func refreshImageHolderView(image : UIImage)  {
-        //for image in imageCollectionArray {
-            let addImageView = UIImageView.init(image: image)
-            addImageView.contentMode = .scaleAspectFit
-            addImageView.translatesAutoresizingMaskIntoConstraints = false
-            // Add size constraints to the image view
-            let widthCst = NSLayoutConstraint(item: addImageView, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 100)
-            addImageView.addConstraint(widthCst)
-            imageStackView.addArrangedSubview(addImageView)
-       // }
+        DispatchQueue.main.async {[weak self] in
+            self?.tableViewHeightConstraints.constant = CGFloat(44 * (self?.imageCollectionArray.count)!)
+            self?.imageTableView.reloadData()
+        }
+
+    }
+}
+
+
+extension AddCategoryViewController : UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You selected cell #\(indexPath.row)!")
+    }
+}
+
+extension AddCategoryViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return imageCollectionArray.count
+    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("Deleted")
+            imageCollectionArray.remove(at: indexPath.row)
+            imageFilenameArray.remove(at: indexPath.row)
+            self.tableViewHeightConstraints.constant = CGFloat(44 * (self.imageCollectionArray.count))
+            imageTableView.beginUpdates()
+            imageTableView.deleteRows(at: [indexPath], with: .automatic)
+            imageTableView.endUpdates()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let imageCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        imageCell.textLabel?.text = imageFilenameArray[indexPath.row]
+        imageCell.imageView?.image = imageCollectionArray[indexPath.row]
+       /* let categoryDict = categoryTableArray[indexPath.row]
+        imageCell.titleBarLabel.text = categoryDict["categoryType"] as? String
+        categoryCell.amountLabel.text   = "\(String(describing: categoryDict["currency"])) \(String(describing: categoryDict["amount"]))"
+        categoryCell.dateLabel.text = categoryDict["date"] as? String*/
+        return imageCell
     }
 }

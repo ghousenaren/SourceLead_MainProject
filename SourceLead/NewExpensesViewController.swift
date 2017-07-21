@@ -270,6 +270,20 @@ extension NewExpensesViewController : UITableViewDataSource {
         return categoryTableArray.count
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("Deleted")
+            categoryTableArray.remove(at: indexPath.row)
+            categoryTableView.beginUpdates()
+            categoryTableView.deleteRows(at: [indexPath], with: .automatic)
+            categoryTableView.endUpdates()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let categoryCell = categoryTableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryTableViewCell
