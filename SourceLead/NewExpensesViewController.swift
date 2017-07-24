@@ -196,8 +196,8 @@ extension NewExpensesViewController {
          "locationCode" :exlocationCode as AnyObject 
          
          ]
-        //let url = BASE_URL +  "restAuthenticate"
-        let url = "http://192.168.1.8:8080/sourcelead/rest/getExpenseEntryDetails"
+        let url = BASE_URL +  "getExpenseEntryDetails"
+        //let url = "http://192.168.1.12:8080/sourcelead/rest/getExpenseEntryDetails"
         var data : Data
          do {
          data = try JSONSerialization.data(withJSONObject:parameter, options:[])

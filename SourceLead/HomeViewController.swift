@@ -17,7 +17,7 @@ class HomeViewController: UIViewController, SideMenuItemContent, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       //loginProife()
+       loginProife()
         
         // Do any additional setup after loading the view.
     }
@@ -87,14 +87,14 @@ class HomeViewController: UIViewController, SideMenuItemContent, UITableViewData
 extension HomeViewController {
     func loginProife() {
         let defaults = UserDefaults.standard
-        let tokenvalue = defaults.object(forKey: "TOKEN")
+        let tokenvalue = defaults.object(forKey: "TOKEN") as! String
         
         /*print(tokenvalue)
          let parameter : [String : String] = [
          "token" :tokenvalue as! String
          ]*/
-        //let url = BASE_URL +  "restAuthenticate"
-        let url = "http://192.168.1.8:8080/sourcelead/rest/loginUserProfile"
+        let url = BASE_URL +  "loginUserProfile"
+        //let url = "http://192.168.1.12:8080/sourcelead/rest/loginUserProfile"
         /*var data : Data
          do {
          data = try JSONSerialization.data(withJSONObject:parameter, options:[])
@@ -107,8 +107,7 @@ extension HomeViewController {
         let headers : [String : AnyObject] = ["Content-Type" : "application/json" as AnyObject, "X-CustomToken" : tokenvalue as AnyObject]
         WebServices.sharedInstance.performApiCallWithURLString(urlString: url, methodName: "GET", headers: headers, parameters: nil, httpBody: nil, withMessage: "Loading...", alertMessage: "Please check your device settings to ensure you have a working internet connection.", fromView: self.view, successHandler:  {[weak self] json, response in
             if let result = json as? Dictionary<String , AnyObject> {
-                
-                /*guard let mainResponseArc = MainResponse(json: result) else {
+               /* guard let mainResponseArc = MainResponse(json: result) else {
                     print("--------------Error-------------")
                     return
                 }*/

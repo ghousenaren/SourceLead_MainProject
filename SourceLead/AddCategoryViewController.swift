@@ -57,7 +57,7 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
     
     }
     @IBAction func saveButtonAction(_ sender: UIButton) {
-        if validate() {
+       // if validate() {
             
             //Need to added Expenses Id and a auto Id for this
             let addExpensesJson = ["cateogyType" :  self.categoryTypeLabel.text ?? "",
@@ -80,7 +80,7 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
             StorageData.set(allExpensesRecordsArray, forKey : "EXPENSES_JSON")
             
             self.performSegue(withIdentifier: "unwindToNewExpensesController", sender: self)
-        }
+    //}
     }
 
     /*
@@ -218,10 +218,10 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
     }
     
     @IBAction func cameraButtonAction(_ sender: UIButton) {
-        if imageCollectionArray.count > 2 {
-            showAlert(withMessage :"Max 3 screenshots")
-            return
-        }
+//        if imageCollectionArray.count > 2 {
+//            showAlert(withMessage :"Max 3 screenshots")
+//            return
+//        }
         handlingAlertActions()
     }
     

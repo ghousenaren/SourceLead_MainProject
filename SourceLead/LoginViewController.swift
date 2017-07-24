@@ -104,35 +104,42 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
 
 extension LoginViewController {
     func loginAPI() {
-        let parameter : [String : String] = [
-            "username" : userIdTextField.text!,
-            "password":passwordTextField.text!
-        ]
-        //let url = BASE_URL +  "restAuthenticate"
-        let url = "http://192.168.1.8:8080/sourcelead/restAuthenticate"
-        var data : Data
-        do {
-            data = try JSONSerialization.data(withJSONObject:parameter, options:[])
-            
-        }catch {
-            print("JSON serialization failed:  \(error)")
-            showAlertMessage(title: "Error", message: "Error in sending data")
-            return
-        }
+//        let parameter : [String : String] = [
+//            "username" : userIdTextField.text!,
+//            "password":passwordTextField.text!
+//        ]
+        let url = BASE_URL +  "rest/"
+        //let url = "http://192.168.1.12:8080/sourcelead/rest/"
+//        var data : Data
+//        do {
+//            data = try JSONSerialization.data(withJSONObject:parameter, options:[])
+//            
+//        }catch {
+//            print("JSON serialization failed:  \(error)")
+//            showAlertMessage(title: "Error", message: "Error in sending data")
+//            return
+//        }
 //        let headers : [String : AnyObject] = ["Content-Type" : "application/json" as AnyObject, "X-  Username" : userIdTextField.text as AnyObject, "X-Password" : passwordTextField.text as AnyObject]
-        let headers : [String : AnyObject] = ["Content-Type" : "application/json" as AnyObject]
+        let headers : [String : AnyObject] = ["Content-Type" : "application/json" as AnyObject,"X-Username":"srinivas.vemula@businessintelli.com" as AnyObject,"X-Password":passwordTextField.text! as AnyObject]
 
-        WebServices.sharedInstance.performApiCallWithURLString(urlString: url, methodName: "POST", headers: headers, parameters: nil, httpBody: data, withMessage: "Login...", alertMessage: "Please check your device settings to ensure you have a working internet connection.", fromView: self.view, successHandler:  {[weak self] json, response in
-            if let result = json as? Dictionary<String , AnyObject> {
-                print(result)
-                if let validUserCheck = result["loginResponse"] as? String, validUserCheck == "Valid User" {
-                    if let token = result["token"] as? String {
+        WebServices.sharedInstance.performApiCallWithURLString(urlString: url, methodName: "POST", headers: headers, parameters: nil, httpBody: nil, withMessage: "Login...", alertMessage: "Please check your device settings to ensure you have a working internet connection.", fromView: self.view, successHandler:  {[weak self] json, response in
+            if let httpResponse = response {
+                /*guard let mainResponseArc = MainResponse(json: result) else {
+                 print("--------------Error-------------")
+                 return
+                 }*/
+                print("^^^^^^^^^^",httpResponse)
+                
+                if let headers = httpResponse.allHeaderFields as? [String: String]{
+                    
+                   let token = headers["X-CustomToken"]!
+                        print("token--------------",token)
                         UserDefaults.standard.setValue(token, forKey: "TOKEN")
                         let appdelegate = UIApplication.shared.delegate as! AppDelegate
                         appdelegate.createMenuView()
-                    }
-                }else {
-                    self?.showAlertMessage(title : "Problem" , message: "Email is not register with us.")
+
+                    
+               
                 }
             }else {
                 self?.showAlertMessage(title : "Problem" , message: "Issue in API Response.")
