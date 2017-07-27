@@ -108,7 +108,7 @@ extension LoginViewController {
 //            "username" : userIdTextField.text!,
 //            "password":passwordTextField.text!
 //        ]
-        let url = BASE_URL +  "rest/"
+        let url = BASE_URL
         //let url = "http://192.168.1.12:8080/sourcelead/rest/"
 //        var data : Data
 //        do {
@@ -132,14 +132,14 @@ extension LoginViewController {
                 
                 if let headers = httpResponse.allHeaderFields as? [String: String]{
                     
-                   let token = headers["X-CustomToken"]!
+                    if let token = headers["X-CustomToken"] {
                         print("token--------------",token)
                         UserDefaults.standard.setValue(token, forKey: "TOKEN")
                         let appdelegate = UIApplication.shared.delegate as! AppDelegate
                         appdelegate.createMenuView()
-
-                    
-               
+                    }else {
+                        self?.showAlertMessage(title : "Problem" , message: "Login failed, try again.")
+                    }
                 }
             }else {
                 self?.showAlertMessage(title : "Problem" , message: "Issue in API Response.")

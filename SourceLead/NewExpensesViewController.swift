@@ -21,7 +21,7 @@ class NewExpensesViewController: UIViewController {
     @IBOutlet weak var datePickerHolderStackView: UIStackView!
     
     @IBOutlet weak var categoryTableView: UITableView!
-    var categoryTableArray = [[:]]
+    var categoryTableArray = [AddExpenseRecord]()
     var mainExpensesResponse: ExpensesResponse!
     var expanseuserID      = Int()
     var exlocationCode     = String()
@@ -67,7 +67,7 @@ class NewExpensesViewController: UIViewController {
         
         //
         let tokenvalue = StorageData.object(forKey: "TOKEN")
-
+        self.categoryTableView.tableFooterView = UIView(frame: .zero)
        
         print("---------------------------",expanseuserID,exlocationCode,tokenvalue!)
       expenseApi() 
@@ -78,7 +78,7 @@ class NewExpensesViewController: UIViewController {
         guard let categoryArray  = StorageData.value(forKey: "EXPENSES_JSON")  else {
             return
         }
-        categoryTableArray = categoryArray as! [Dictionary<AnyHashable, Any>]
+        categoryTableArray = categoryArray as! [AddExpenseRecord]
          DispatchQueue.main.async{ [weak self] in
                 self?.categoryTableView.reloadData()
         }
@@ -245,10 +245,7 @@ extension NewExpensesViewController {
 
 //                    StorageData.set(exlocationCode, forKey: "LOCATIONCODE")
                 }
-                
-                
-                
-            }else {
+             }else {
                 self?.showAlertMessage(title : "Problem" , message: "Issue in API Response.")
             }
             }, failureHandler: { response, error in
@@ -266,7 +263,6 @@ extension NewExpensesViewController : UITableViewDelegate {
 
 extension NewExpensesViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
         return categoryTableArray.count
     }
     
@@ -289,9 +285,10 @@ extension NewExpensesViewController : UITableViewDataSource {
         let categoryCell = categoryTableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryTableViewCell
         
         let categoryDict = categoryTableArray[indexPath.row]
-        categoryCell.titleBarLabel.text = categoryDict["categoryType"] as? String
-        categoryCell.amountLabel.text   = "\(String(describing: categoryDict["currency"])) \(String(describing: categoryDict["amount"]))"
-        categoryCell.dateLabel.text = categoryDict["date"] as? String
+        categoryCell.titleBarLabel.text = categoryDict.cateogyType
+        categoryCell.typeLabel.text = categoryDict.cateogyType
+        categoryCell.amountLabel.text   = "\(String(describing: categoryDict.currency!)) \(String(describing: categoryDict.amount!))"
+        categoryCell.dateLabel.text = categoryDict.date as? String
         return categoryCell
     }
 }

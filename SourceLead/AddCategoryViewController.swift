@@ -17,16 +17,16 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
     var mainExpensesResponse: ExpensesResponse!
 
     @IBOutlet weak var catagoryButton: UIButton!
-
     @IBOutlet weak var paymentmodeButton: UIButton!
     @IBOutlet weak var dateButton: UIButton!
-    
     @IBOutlet weak var CurrencyButton: UIButton!
+
     var currencySymbolsArray = [String]()
     var categoryArray = [String]()
     var paymentModeArray = [String]()
-    var imageCollectionArray = [UIImage]()
+    var imageCollectionArray = [Data]()
     var imageFilenameArray = [String]()
+    
     @IBOutlet weak var categoryTypeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var paymentModeLabel: UILabel!
@@ -41,26 +41,23 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      /* currencySymbolsArray = mainExpensesResponse.currencyCodeList as! [String]
+       currencySymbolsArray = mainExpensesResponse.currencyCodeList as! [String]
        paymentModeArray     = mainExpensesResponse.paymentModes as! [String]
-       for categoryName in mainExpensesResponse.expenseCategoryList! {
+        
+        for categoryName in mainExpensesResponse.expenseCategoryList! {
             categoryArray.append(categoryName.expensesName!)
           
-        }*/
-//       for paymentmode in mainExpensesResponse.expenseCategoryList!.{
-//           paymentModeArray.append(categoryName.expensesName!)
-//        }
-        
+        }
         
     }
     @IBAction func backCancelButtonAction(_ sender: UIButton) {
     
     }
     @IBAction func saveButtonAction(_ sender: UIButton) {
-       // if validate() {
+        if validate() {
             
             //Need to added Expenses Id and a auto Id for this
-            let addExpensesJson = ["cateogyType" :  self.categoryTypeLabel.text ?? "",
+            /*let addExpensesJson = ["cateogyType" :  self.categoryTypeLabel.text ?? "",
                                    "date"        :  self.dateLabel.text ?? "",
                                    "paymentMode" :  self.paymentModeLabel.text ?? "",
                                    "amount"      :  self.amountTextField.text ?? "",
@@ -69,18 +66,20 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
                                    "description" :  self.descriptionTextView.text ?? "",
                                    "attachments" :  imageCollectionArray,
                                    "filenames"   :  imageFilenameArray
-            ] as? [String:AnyObject]
+            ] as? [String:AnyObject]*/
         
-            guard var allExpensesRecordsArray  = StorageData.value(forKey: "EPENSES_JSON") as? [[String : AnyObject]]  else {
+            let addExpensesJson = AddExpenseRecord.init(cateogyType: self.categoryTypeLabel.text!, date: self.dateLabel.text!, paymentMode: self.paymentModeLabel.text!, amount: self.amountTextField.text!, currency: self.currencySelectedLabel.text!, receiptBy: self.receiptIssuedByTextField.text!, description: self.descriptionTextView.text!, attachments: imageCollectionArray, filenames: imageFilenameArray)
+            
+            var allExpensesRecordsArray  = StorageData.value(forKey: "EXPENSES_JSON") as? [AddExpenseRecord]
+            if allExpensesRecordsArray == nil {
                 let newExpensesArray = [addExpensesJson]
                 StorageData.set(newExpensesArray, forKey : "EXPENSES_JSON")
                 return
             }
-            allExpensesRecordsArray.append(addExpensesJson!)
+            allExpensesRecordsArray?.append(addExpensesJson)
             StorageData.set(allExpensesRecordsArray, forKey : "EXPENSES_JSON")
-            
             self.performSegue(withIdentifier: "unwindToNewExpensesController", sender: self)
-    //}
+        }
     }
 
     /*
@@ -92,8 +91,8 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
      "description":"test",
      "paymentMode":"Credit Card",
      "receiptBy":"test"
- 
      */
+    
     func validate() -> Bool {
         guard (self.categoryTypeLabel.text?.characters.count)! > 2 else {
             showAlert(withMessage : "category type should be selected")
@@ -115,7 +114,6 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
             showAlert(withMessage : "Kindly mention receipt issued by")
             return false
         }
-        
     return true
     }
     
@@ -196,7 +194,8 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
         self.dismiss(animated: true, completion: nil)
         // All It is a we retriew Pictuer that we are selecting from iOS device
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imageCollectionArray.append(image)
+            let imageData = UIImageJPEGRepresentation(image, 1.0)
+            imageCollectionArray.append(imageData!)
             refreshImageHolderView(image : image)
         }
         guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else {
@@ -218,10 +217,7 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
     }
     
     @IBAction func cameraButtonAction(_ sender: UIButton) {
-//        if imageCollectionArray.count > 2 {
-//            showAlert(withMessage :"Max 3 screenshots")
-//            return
-//        }
+
         handlingAlertActions()
     }
     
@@ -301,7 +297,8 @@ extension AddCategoryViewController : UITableViewDataSource {
         
         let imageCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         imageCell.textLabel?.text = imageFilenameArray[indexPath.row]
-        imageCell.imageView?.image = imageCollectionArray[indexPath.row]
+        let yourImage = UIImage(data:imageCollectionArray[indexPath.row])
+        imageCell.imageView?.image = yourImage //
        /* let categoryDict = categoryTableArray[indexPath.row]
         imageCell.titleBarLabel.text = categoryDict["categoryType"] as? String
         categoryCell.amountLabel.text   = "\(String(describing: categoryDict["currency"])) \(String(describing: categoryDict["amount"]))"

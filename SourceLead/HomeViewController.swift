@@ -104,7 +104,7 @@ extension HomeViewController {
          showAlertMessage(title: "Error", message: "Error in sending data")
          return
          }*/
-        let headers : [String : AnyObject] = ["Content-Type" : "application/json" as AnyObject, "X-CustomToken" : tokenvalue as AnyObject]
+        let headers : [String : AnyObject] = ["X-CustomToken" : tokenvalue as AnyObject]
         WebServices.sharedInstance.performApiCallWithURLString(urlString: url, methodName: "GET", headers: headers, parameters: nil, httpBody: nil, withMessage: "Loading...", alertMessage: "Please check your device settings to ensure you have a working internet connection.", fromView: self.view, successHandler:  {[weak self] json, response in
             if let result = json as? Dictionary<String , AnyObject> {
                /* guard let mainResponseArc = MainResponse(json: result) else {

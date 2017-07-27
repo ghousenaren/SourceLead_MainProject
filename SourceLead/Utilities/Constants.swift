@@ -9,5 +9,17 @@
 import Foundation
 
 //============ CONSTANT DECLARATION
-let BASE_URL = "http://qa2.sourcelead.net/sourcelead/" //"http://qa2.sourcelead.net/sourcelead/"
+let BASE_URL = "http://qa2.sourcelead.net/sourcelead/rest/" //"http://qa2.sourcelead.net/sourcelead/"
 let StorageData = UserDefaults.standard
+
+struct AddExpenseRecord {
+    var cateogyType     :   String?
+    var date            :   String?
+    var paymentMode     :   String?
+    var amount          :   String?
+    var currency        :   String?
+    var receiptBy       :   String?
+    var description     :   String?
+    var attachments     :   [Data]?
+    var filenames       :   [String]?
+}
