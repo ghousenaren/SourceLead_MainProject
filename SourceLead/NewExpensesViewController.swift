@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyPickerPopover
+import Alamofire
 
 class NewExpensesViewController: UIViewController {
 
@@ -120,6 +121,48 @@ class NewExpensesViewController: UIViewController {
     }
     @IBAction func SubmitButtonAction(_ sender: UIButton) {
         
+        //NEED TO CHANGE API CALL URL
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            //Reading Images data and filenames
+            for expensesRecord in self.categoryTableArray {
+                let imageData       = expensesRecord.attachments
+                let imageFileNames  = expensesRecord.filenames
+                var index = 0
+                for imageD in imageData! {
+                    multipartFormData.append(imageD, withName: imageFileNames[index], fileName: imageFileNames[index], mimeType: "image/jpeg")
+                    index++
+                }
+            }
+            for (key, value) in saveExpensesJSON {
+                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+            }
+        }, to:"http://server1/upload_img.php")
+        { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                
+                upload.uploadProgress(closure: { (Progress) in
+                    print("Upload Progress: \(Progress.fractionCompleted)")
+                })
+                
+                upload.responseJSON { response in
+                    //self.delegate?.showSuccessAlert()
+                    print(response.request)  // original URL request
+                    print(response.response) // URL response
+                    print(response.data)     // server data
+                    print(response.result)   // result of response serialization
+                    //                        self.showSuccesAlert()
+                    //self.removeImage("frame", fileExtension: "txt")
+                    if let JSON = response.result.value {
+                        print("JSON: \(JSON)")
+                    }
+                }
+            case .failure(let encodingError):
+                //self.delegate?.showFailAlert()
+                print(encodingError)
+            }
+        }
     }
     
     
