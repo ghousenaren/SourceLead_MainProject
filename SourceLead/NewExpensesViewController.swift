@@ -78,7 +78,11 @@ class NewExpensesViewController: UIViewController {
         guard let categoryArray  = StorageData.value(forKey: "EXPENSES_JSON")  else {
             return
         }
-        categoryTableArray = categoryArray as! [AddExpenseRecord]
+        
+        
+        
+        categoryTableArray = NSKeyedUnarchiver.unarchiveObject(with: categoryArray as! Data) as! [AddExpenseRecord]
+        //categoryTableArray = categoryArray as! [AddExpenseRecord]
          DispatchQueue.main.async{ [weak self] in
                 self?.categoryTableView.reloadData()
         }

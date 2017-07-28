@@ -70,14 +70,21 @@ class AddCategoryViewController: UIViewController, UINavigationControllerDelegat
         
             let addExpensesJson = AddExpenseRecord.init(cateogyType: self.categoryTypeLabel.text!, date: self.dateLabel.text!, paymentMode: self.paymentModeLabel.text!, amount: self.amountTextField.text!, currency: self.currencySelectedLabel.text!, receiptBy: self.receiptIssuedByTextField.text!, description: self.descriptionTextView.text!, attachments: imageCollectionArray, filenames: imageFilenameArray)
             
-            var allExpensesRecordsArray  = StorageData.value(forKey: "EXPENSES_JSON") as? [AddExpenseRecord]
+             
+            let allExpensesRecordsArray  = StorageData.value(forKey: "EXPENSES_JSON")
             if allExpensesRecordsArray == nil {
                 let newExpensesArray = [addExpensesJson]
-                StorageData.set(newExpensesArray, forKey : "EXPENSES_JSON")
+                let encodedData = NSKeyedArchiver.archivedData(withRootObject: newExpensesArray)
+                StorageData.set(encodedData, forKey : "EXPENSES_JSON")
+                self.performSegue(withIdentifier: "unwindToNewExpensesController", sender: self)
+
                 return
             }
-            allExpensesRecordsArray?.append(addExpensesJson)
-            StorageData.set(allExpensesRecordsArray, forKey : "EXPENSES_JSON")
+
+            var addExpensesJsonArray = NSKeyedUnarchiver.unarchiveObject(with: allExpensesRecordsArray as! Data) as! [AddExpenseRecord]
+            addExpensesJsonArray.append(addExpensesJson)
+            let encodedData = NSKeyedArchiver.archivedData(withRootObject: addExpensesJsonArray)
+            StorageData.set(encodedData, forKey : "EXPENSES_JSON")
             self.performSegue(withIdentifier: "unwindToNewExpensesController", sender: self)
         }
     }

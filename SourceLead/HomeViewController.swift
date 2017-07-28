@@ -65,13 +65,10 @@ class HomeViewController: UIViewController, SideMenuItemContent, UITableViewData
     
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        
-        
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
             return cell
         }
-        
         // second row should display categories
         if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CellExpanse", for: indexPath) as UITableViewCell
@@ -79,10 +76,7 @@ class HomeViewController: UIViewController, SideMenuItemContent, UITableViewData
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
         return cell
-        
-        
     }
-    
 }
 extension HomeViewController {
     func loginProife() {

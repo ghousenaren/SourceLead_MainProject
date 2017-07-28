@@ -54,6 +54,7 @@
 		643B6A7D1F0CDFBD00CA2AE1 /* ExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B6A7C1F0CDFBD00CA2AE1 /* ExpensesViewController.swift */; };
 		6442AE6B1F0B7049009776AA /* Designables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6442AE691F0B7049009776AA /* Designables.swift */; };
 		6442AE6C1F0B7049009776AA /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6442AE6A1F0B7049009776AA /* UIViewX.swift */; };
+		645E1A481F2AF4A50000C3AA /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645E1A471F2AF4A50000C3AA /* DatabaseManager.swift */; };
 		646B92F31EFA5EB5001ACCFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646B92F21EFA5EB5001ACCFB /* Constants.swift */; };
 		646C4F531EFB92AA00FA4C63 /* UsefulExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646C4F521EFB92AA00FA4C63 /* UsefulExtensions.swift */; };
 		646C4F551EFBE6B600FA4C63 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646C4F541EFBE6B600FA4C63 /* Global.swift */; };
@@ -125,6 +126,7 @@
 		643B6A7C1F0CDFBD00CA2AE1 /* ExpensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpensesViewController.swift; sourceTree = "<group>"; };
 		6442AE691F0B7049009776AA /* Designables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Designables.swift; sourceTree = "<group>"; };
 		6442AE6A1F0B7049009776AA /* UIViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
+		645E1A471F2AF4A50000C3AA /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		646B92F21EFA5EB5001ACCFB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		646C4F521EFB92AA00FA4C63 /* UsefulExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsefulExtensions.swift; sourceTree = "<group>"; };
 		646C4F541EFBE6B600FA4C63 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				646C4F521EFB92AA00FA4C63 /* UsefulExtensions.swift */,
 				646B92F21EFA5EB5001ACCFB /* Constants.swift */,
 				641239DC1F14C360002D5B89 /* DropMenuButton.swift */,
+				645E1A471F2AF4A50000C3AA /* DatabaseManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				4865DE031EFCE7BA00B99EAB /* DashboardViewController.swift in Sources */,
 				6442AE6B1F0B7049009776AA /* Designables.swift in Sources */,
 				646C4F551EFBE6B600FA4C63 /* Global.swift in Sources */,
+				645E1A481F2AF4A50000C3AA /* DatabaseManager.swift in Sources */,
 				641239DD1F14C360002D5B89 /* DropMenuButton.swift in Sources */,
 				646B92F31EFA5EB5001ACCFB /* Constants.swift in Sources */,
 				48EB707D1F135C4A0028CDEC /* SettingsViewController.swift in Sources */,
