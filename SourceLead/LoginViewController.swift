@@ -21,16 +21,16 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     @IBOutlet weak var passImgView: UIImageView!
     
     @IBAction func loginAction(_ sender: Any) {
-        loginAPI()
-        /*guard (userIdTextField.text?.characters.count)!>2 else {
-         showAlertMessage(message: "Username can't be empty")
+//        loginAPI()
+        guard (userIdTextField.text?.characters.count)!>2 else {
+         showAlertMessage(title: "", message: "Username can't be empty")
          return
          }
          guard (passwordTextField.text?.characters.count)!>2 else {
-         showAlertMessage(message: "Password can't be empty")
+         showAlertMessage(title: "", message: "Password can't be empty")
          return
-         }*/
-        //loginAPI()
+         }
+        loginAPI()
     }
     
     
@@ -120,7 +120,7 @@ extension LoginViewController {
 //            return
 //        }
 //        let headers : [String : AnyObject] = ["Content-Type" : "application/json" as AnyObject, "X-  Username" : userIdTextField.text as AnyObject, "X-Password" : passwordTextField.text as AnyObject]
-        let headers : [String : AnyObject] = ["Content-Type" : "application/json" as AnyObject,"X-Username":"srinivas.vemula@businessintelli.com" as AnyObject,"X-Password":passwordTextField.text! as AnyObject]
+        let headers : [String : AnyObject] = ["Content-Type" : "application/json" as AnyObject,"X-Username":userIdTextField.text! as AnyObject,"X-Password":passwordTextField.text! as AnyObject]
 
         WebServices.sharedInstance.performApiCallWithURLString(urlString: url, methodName: "POST", headers: headers, parameters: nil, httpBody: nil, withMessage: "Login...", alertMessage: "Please check your device settings to ensure you have a working internet connection.", fromView: self.view, successHandler:  {[weak self] json, response in
             if let httpResponse = response {
@@ -129,6 +129,25 @@ extension LoginViewController {
                  return
                  }*/
                 print("^^^^^^^^^^",httpResponse)
+                let statuscode = httpResponse.statusCode
+                print(statuscode)
+                if statuscode == 302 {
+                    self?.showAlertMessage(title : "Problem" , message: "InActiveUser")
+
+                }
+                else if statuscode == 404 {
+                    self?.showAlertMessage(title : "Problem" , message: "UnRegisterd User")
+
+                }
+                else if statuscode == 401 {
+                    self?.showAlertMessage(title : "Problem" , message: "Invalid User")
+
+                }
+                
+                else {
+                    self?.showAlertMessage(title : "Problem" , message: "Invalid Password")
+
+                }
                 
                 if let headers = httpResponse.allHeaderFields as? [String: String]{
                     
