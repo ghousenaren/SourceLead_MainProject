@@ -62,6 +62,7 @@
 		647842321F06143000066738 /* HostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6478422E1F06143000066738 /* HostViewController.swift */; };
 		647842341F06143000066738 /* NavigationMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647842301F06143000066738 /* NavigationMenuViewController.swift */; };
 		647842351F06143000066738 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647842311F06143000066738 /* TabBarViewController.swift */; };
+		6483349E1F78E3FC008278D1 /* Readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6483349D1F78E3FC008278D1 /* Readme.txt */; };
 		6483D3D31F1F9AFF0075DB58 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483D3D21F1F9AFF0075DB58 /* CategoryTableViewCell.swift */; };
 		64CDFABB1F133953002C528A /* MyExpensesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CDFABA1F133953002C528A /* MyExpensesTableViewCell.swift */; };
 		64CDFABD1F1345A4002C528A /* NewExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CDFABC1F1345A4002C528A /* NewExpensesViewController.swift */; };
@@ -134,6 +135,7 @@
 		6478422E1F06143000066738 /* HostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostViewController.swift; sourceTree = "<group>"; };
 		647842301F06143000066738 /* NavigationMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationMenuViewController.swift; sourceTree = "<group>"; };
 		647842311F06143000066738 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		6483349D1F78E3FC008278D1 /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
 		6483D3D21F1F9AFF0075DB58 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryTableViewCell.swift; path = View/CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		64CDFABA1F133953002C528A /* MyExpensesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyExpensesTableViewCell.swift; path = View/MyExpensesTableViewCell.swift; sourceTree = "<group>"; };
 		64CDFABC1F1345A4002C528A /* NewExpensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExpensesViewController.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				484E1AC11EDEF16E0095052A /* LaunchScreen.storyboard */,
 				48F1C2A61EE66C0A00B7637B /* GoogleService-Info.plist */,
 				484E1AC41EDEF16E0095052A /* Info.plist */,
+				6483349D1F78E3FC008278D1 /* Readme.txt */,
 			);
 			path = SourceLead;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				48BEC6A81EE9415300DEBAD0 /* Assets.xcassets in Resources */,
 				484E1ABE1EDEF16E0095052A /* Main.storyboard in Resources */,
 				4865DE071EFCED5F00B99EAB /* ic_launcher.gif in Resources */,
+				6483349E1F78E3FC008278D1 /* Readme.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
